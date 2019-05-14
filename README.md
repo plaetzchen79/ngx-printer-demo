@@ -2,6 +2,53 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 
+# Usage
+1. Add to main *app.module* imports
+2. Use the *NgxPrinterService* where you like via DI (private printerService: NgxPrinterService)
+3. Use the the functions provided by the service
+
+## Options
+The service prints by opening a new window.
+There is an option *printWindowOpen* to change this behavoir.
+Set printWindowOpen=false;
+
+You can also set this option in .forRoot while importing the
+module to the *app.module*
+
+```javascript
+    imports: [
+    BrowserModule,
+    NgxPrinterModule.forRoot({printOpenWindow: true})
+  ],
+```
+
+## Functions
+### Print current window
+`this.printerService.printCurrentWindow();`
+
+### Print div by id
+`this.printerService.printDiv('idOfDivToPrint');`
+
+### Print Angular TemplateRef or Component
+```javascript
+ @ViewChild('PrintTemplate')
+  private PrintTemplateTpl: TemplateRef<any>;
+
+printTemplate() {
+    this.printerService.printAngular(this.PrintTemplateTpl);
+  }
+```
+
+## Event of print window
+If you want to check whether the print window is open or not subscribe to obserbable
+*$printWindowOpen*
+
+```javascript
+this.printWindowSunscription = this.printerService.$printWindowOpen.subscribe(val => {
+      console.log('Print window is open:', val);
+});
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-printer": [
+        "dist/ngx-printer"
+      ],
+      "ngx-printer/*": [
+        "dist/ngx-printer/*"
+      ]
+    }
   }
 }
