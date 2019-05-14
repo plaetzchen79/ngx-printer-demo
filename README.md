@@ -1,6 +1,7 @@
 # NgxPrinterDemo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+A simple service to print the window or parts of a window (div).
+Printing of Angular Templates or Components is possible.
 
 # Usage
 1. Add to main *app.module* imports
