@@ -3,6 +3,8 @@
 A simple service to print the window or parts of a window (div).
 Printing of Angular Templates or Components is possible.
 
+Start the demo app with *ng serve*.
+
 # Usage
 1. Add to main *app.module* imports
 2. Use the *NgxPrinterService* where you like via DI (private printerService: NgxPrinterService)
