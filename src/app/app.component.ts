@@ -3,9 +3,11 @@ import {
   Component,
   ViewChild,
   TemplateRef,
-  ViewContainerRef
+  ViewContainerRef,
+  ElementRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { LittleDummyComponent } from './little-dummy/little-dummy.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,9 @@ import { Subscription } from 'rxjs';
 export class AppComponent {
   @ViewChild('PrintTemplate')
   private PrintTemplateTpl: TemplateRef<any>;
+
+  @ViewChild(LittleDummyComponent, {read: ElementRef})
+  PrintComponent: ElementRef;
 
   title = 'ngx-printer-demo';
 
@@ -47,6 +52,12 @@ export class AppComponent {
   printDivToCurrent() {
     this.printerService.printOpenWindow = true;
     this.printerService.printDiv('printDiv');
+    this.printerService.printOpenWindow = false;
+  }
+
+  printHTMLElementToCurrent() {
+    this.printerService.printOpenWindow = true;
+    this.printerService.printHTMLElement(this.PrintComponent.nativeElement);
     this.printerService.printOpenWindow = false;
   }
 

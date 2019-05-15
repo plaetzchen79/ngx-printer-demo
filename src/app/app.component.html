@@ -8,9 +8,8 @@
   <span>Some text</span>
 </div>
 
-<!-- <br />
+<br />
 <little-dummy></little-dummy>
- -->
  
 <br />
 <ng-template #PrintTemplate>
@@ -21,10 +20,14 @@
   <span>Some text</span>
 </ng-template>
 
+<br />
 <button (click)="printDiv()">Print div</button>
 <br />
 <br />
 <button (click)="printDivToCurrent()">Print div to current window</button>
+<br />
+<br />
+<button (click)="printHTMLElementToCurrent()">Print component as native Element to current window</button>
 <br />
 <br />
 <button (click)="printTemplate()">Print template</button>

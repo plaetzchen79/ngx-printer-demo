@@ -39,6 +39,18 @@ printTemplate() {
     this.printerService.printAngular(this.PrintTemplateTpl);
   }
 ```
+Beware: To print a component the component needs to be known by service (copy source and add it to entry
+component of app.module).
+Otherwise use printHTMLElement instead.
+
+### Print HTML Element
+```javascript
+ @ViewChild(LittleDummyComponent, {read: ElementRef}) PrintComponent: ElementRef;
+
+ printHTMLElementToCurrent() {
+    this.printerService.printHTMLElement(this.PrintComponent.nativeElement);
+  }
+```
 
 ## Event of print window
 If you want to check whether the print window is open or not subscribe to obserbable

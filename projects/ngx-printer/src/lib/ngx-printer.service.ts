@@ -77,6 +77,14 @@ export class NgxPrinterService {
     this.print(nativeEl.nativeElement);
   }
 
+  /**
+   * Print native Element (HTML Element)
+   * @param nativeElement 
+   */
+  public printHTMLElement(nativeElement: HTMLElement) {
+    this.print(nativeElement);
+  }
+
 
   /**
    * Create and render component
