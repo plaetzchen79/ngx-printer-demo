@@ -4,5 +4,24 @@
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"
-  }
+  },
+  "description": "A simple service to print the window or parts of a window (div).\r Printing of Angular Templates or Components is possible.",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plaetzchen79/ngx-printer-demo.git"
+  },
+  "keywords": [
+    "angular",
+    "print"
+  ],
+  "author": "Andre Ravalico",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/plaetzchen79/ngx-printer-demo/issues"
+  },
+  "homepage": "https://github.com/plaetzchen79/ngx-printer-demo#readme"
 }

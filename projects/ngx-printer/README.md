@@ -1,7 +1,6 @@
 A simple service to print the window or parts of a window (div).
 Printing of Angular Templates or Components is possible.
 
-Until now not a real npm lib- to follow.
 
 See DEMO App for examples.
 
@@ -39,6 +38,18 @@ module to the *app.module*
 
 printTemplate() {
     this.printerService.printAngular(this.PrintTemplateTpl);
+  }
+```
+Beware: To print a component the component needs to be known by service (copy source and add it to entry
+component of app.module).
+Otherwise use printHTMLElement instead.
+
+### Print HTML Element
+```javascript
+ @ViewChild(LittleDummyComponent, {read: ElementRef}) PrintComponent: ElementRef;
+
+ printHTMLElementToCurrent() {
+    this.printerService.printHTMLElement(this.PrintComponent.nativeElement);
   }
 ```
 

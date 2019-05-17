@@ -20,14 +20,14 @@ export type Content<T> = string | TemplateRef<T> | Type<T>;
   providedIn: 'root'
 })
 export class NgxPrinterService {
+  private printWindowOpen = new BehaviorSubject<boolean>(false);
+
   templateRef: TemplateRef<any>;
   componentRef: ComponentRef<any>;
   viewContainerRef: ViewContainerRef;
   dynamicElementRef: ElementRef;
 
   printOpenWindow = true;
-
-  printWindowOpen = new BehaviorSubject<boolean>(false);
   $printWindowOpen = this.printWindowOpen.asObservable();
 
   constructor(
@@ -55,7 +55,7 @@ export class NgxPrinterService {
 
   /***
    * Print an Element identified by its className
-   * Prints the firt found
+   * Prints the first found
    */
   public printByClassName(className: string) {
     const elementToPrint = document.getElementsByClassName(className);
@@ -63,7 +63,7 @@ export class NgxPrinterService {
     if (elementToPrint && elementToPrint.length > 0) {
       this.print(<HTMLScriptElement>elementToPrint[0]);
     } else {
-      console.log('element with id ${divID} not found..');
+      console.log('element with id ${className} not found..');
     }
   }
 
@@ -79,16 +79,15 @@ export class NgxPrinterService {
 
   /**
    * Print native Element (HTML Element)
-   * @param nativeElement 
+   * @param nativeElement
    */
   public printHTMLElement(nativeElement: HTMLElement) {
     this.print(nativeElement);
   }
 
-
   /**
    * Create and render component
-   * @param contentToRender 
+   * @param contentToRender
    */
   private createComponent(contentToRender: any): any {
     // this.viewContainerRef.clear();
@@ -107,7 +106,7 @@ export class NgxPrinterService {
   }
 
   /**
-   * 
+   *
    * @param printContent Main print function
    */
   private print(printContent: any) {
@@ -121,7 +120,7 @@ export class NgxPrinterService {
 
   /**
    * Print using a new window / tab
-   * @param divToPrint 
+   * @param divToPrint
    */
   private printInNewWindow(divToPrint: HTMLElement) {
     const printWindow = window.open('', 'PRINT');
