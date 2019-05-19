@@ -1,3 +1,4 @@
+import { PrintItem } from './print-item';
 import {
   Injectable,
   TemplateRef,
@@ -21,6 +22,10 @@ export type Content<T> = string | TemplateRef<T> | Type<T>;
 })
 export class NgxPrinterService {
   private printWindowOpen = new BehaviorSubject<boolean>(false);
+
+
+  private _printItems = new BehaviorSubject<PrintItem[]>([]);
+  $printItems = this._printItems.asObservable();
 
   templateRef: TemplateRef<any>;
   componentRef: ComponentRef<any>;
@@ -171,4 +176,33 @@ export class NgxPrinterService {
     componentRef.changeDetectorRef.detectChanges();
     return [[componentRef.location.nativeElement]];
   }
+
+  /**
+   * Add a new item to print
+   * @param newPrintItem  HTML id
+   */
+  public addPrintItem(newPrintItem: PrintItem): void {
+    const tmpItems = this._printItems.getValue();
+    tmpItems.push(newPrintItem);
+    this._printItems.next(tmpItems);
+  }
+
+  /**
+   * Delete a print item from service
+   * @param idOfItemToRemove 
+   */
+  public removePrintItem(idOfItemToRemove: string): void {
+    const tmpItems = this._printItems.getValue();
+    const newIitems = tmpItems.filter(item => item.id !== idOfItemToRemove);
+    this._printItems.next(newIitems);
+  }
+
+  /**
+   * Print a print Item
+   * @param printItemToPrint 
+   */
+  public printPrintItem(printItemToPrint: PrintItem): void {
+    this.printHTMLElement(printItemToPrint.nativeElement);
+  }
+
 }

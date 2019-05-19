@@ -64,6 +64,29 @@ this.printWindowSunscription = this.printerService.$printWindowOpen.subscribe(va
 });
 ```
 
+## Directive ngxPrintItem
+ There is an directive ngxPrintItem to mark and store an HTML-Element as an item which can be printed 
+ later and anyhwere on the page.
+ An id has to be set.
+ These items are stored in the services observable *printerService.$printItems*.
+ Use the async pipe to subscribe and the function `printPrintItem`  to print the item.
+
+HTML:
+```html
+<span id="firstPrintItem" ngxPrintItem printName="First one" >A <b>first</b> span with an ngxPrintItem directive</span>
+
+<div *ngFor="let prinItem of $printItems | async">
+  <span>{{prinItem.id}} - {{prinItem.printName}}</span>
+  <button (click)="printItem(prinItem)">Print me!</button>
+</div>
+```
+TS:
+```javascript
+  printItem(itemToPrint: PrintItem) {
+    this.printerService.printPrintItem(itemToPrint);
+  }
+});
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

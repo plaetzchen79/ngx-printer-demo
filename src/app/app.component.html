@@ -21,6 +21,11 @@
 </ng-template>
 
 <br />
+<span id="firstPrintItem" ngxPrintItem printName="First one" >A <b>first</b> span with an ngxPrintItem directive</span>
+<br />
+<span id="secondPrintItem" ngxPrintItem printName="Second one"  >A <b>second</b> span with an ngxPrintItem directive</span>
+<br />
+<br />
 <button (click)="printDiv()">Print div</button>
 <br />
 <br />
@@ -37,3 +42,9 @@
 <br />
 <br />
 <button (click)="printString()">Print div to current window</button>
+<br />
+<h2>List of print items</h2>
+<div *ngFor="let prinItem of $printItems | async">
+  <span>{{prinItem.id}} - {{prinItem.printName}}</span>
+  <button (click)="printItem(prinItem)">Print me!</button>
+</div>

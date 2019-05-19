@@ -1,6 +1,6 @@
 {
   "name": "ngx-printer",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"
@@ -16,7 +16,9 @@
   },
   "keywords": [
     "angular",
-    "print"
+    "print",
+    "printer",
+    "service"
   ],
   "author": "Andre Ravalico",
   "license": "ISC",

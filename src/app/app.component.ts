@@ -6,8 +6,10 @@ import {
   ViewContainerRef,
   ElementRef
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { LittleDummyComponent } from './little-dummy/little-dummy.component';
+import { PrintItem } from 'projects/ngx-printer/src/lib/print-item';
+
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,8 @@ export class AppComponent {
 
   title = 'ngx-printer-demo';
 
-  printWindowSunscription: Subscription;
+  printWindowSubscription: Subscription;
+  $printItems: Observable<PrintItem[]>;
 
   constructor(
     private viewContainerRef: ViewContainerRef,
@@ -31,9 +34,11 @@ export class AppComponent {
   ) {
     this.printerService.viewContainerRef = this.viewContainerRef;
 
-    this.printWindowSunscription = this.printerService.$printWindowOpen.subscribe(val => {
+    this.printWindowSubscription = this.printerService.$printWindowOpen.subscribe(val => {
       console.log('Print window is open:', val);
     });
+
+    this.$printItems = this.printerService.$printItems;
   }
 
 
@@ -47,6 +52,10 @@ export class AppComponent {
 
   printComponent() {
     this.printerService.printDiv('printDiv');
+  }
+
+  printItem(itemToPrint: PrintItem) {
+    this.printerService.printPrintItem(itemToPrint);
   }
 
   printDivToCurrent() {
