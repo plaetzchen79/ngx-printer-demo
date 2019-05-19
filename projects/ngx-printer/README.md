@@ -1,8 +1,9 @@
-A simple service to print the window or parts of a window (div).
+A simple service to print the whole window or parts of a window (div).
 Printing of Angular Templates or Components is possible.
+You can print opening a new window / tab or using the current window.
+A directive can also be used to mark and stroe an HTML-element.
 
-
-See DEMO App for examples.
+See the DEMO App for examples.
 
 # Usage
 1. Add to main *app.module* imports
