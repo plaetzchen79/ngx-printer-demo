@@ -86,6 +86,7 @@ TS:
     this.printerService.printPrintItem(itemToPrint);
   }
 });
+```
 
 ## Development server
 
