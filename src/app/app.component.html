@@ -36,6 +36,7 @@
 <br />
 <br />
 <button (click)="printTemplate()">Print template</button>
+<button (click)="printTemplateCurrent()">Print template to current window</button>
 <!-- <br />
 <br />
 <button (click)="createComp()">Create Compoennt</button> -->
@@ -47,4 +48,5 @@
 <div *ngFor="let prinItem of $printItems | async">
   <span>{{prinItem.id}} - {{prinItem.printName}}</span>
   <button (click)="printItem(prinItem)">Print me!</button>
+  <button (click)="printItemCurrent(prinItem)">Print me to current window!</button>
 </div>

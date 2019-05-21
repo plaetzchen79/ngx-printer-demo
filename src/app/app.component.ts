@@ -50,6 +50,12 @@ export class AppComponent {
     this.printerService.printAngular(this.PrintTemplateTpl);
   }
 
+  printTemplateCurrent() {
+    this.printerService.printOpenWindow = false;
+    this.printerService.printAngular(this.PrintTemplateTpl);
+    this.printerService.printOpenWindow = true;
+  }
+
   printComponent() {
     this.printerService.printDiv('printDiv');
   }
@@ -58,16 +64,22 @@ export class AppComponent {
     this.printerService.printPrintItem(itemToPrint);
   }
 
-  printDivToCurrent() {
-    this.printerService.printOpenWindow = true;
-    this.printerService.printDiv('printDiv');
+  printItemCurrent(itemToPrint: PrintItem) {
     this.printerService.printOpenWindow = false;
+    this.printerService.printPrintItem(itemToPrint);
+    this.printerService.printOpenWindow = true;
+  }
+
+  printDivToCurrent() {
+    this.printerService.printOpenWindow = false;
+    this.printerService.printDiv('printDiv');
+    this.printerService.printOpenWindow = true;
   }
 
   printHTMLElementToCurrent() {
-    this.printerService.printOpenWindow = true;
-    this.printerService.printHTMLElement(this.PrintComponent.nativeElement);
     this.printerService.printOpenWindow = false;
+    this.printerService.printHTMLElement(this.PrintComponent.nativeElement);
+    this.printerService.printOpenWindow = true;
   }
 
 

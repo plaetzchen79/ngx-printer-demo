@@ -15,7 +15,7 @@ import { NgxPrinterComponent } from './ngx-printer.component';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { PrintServiceConfig } from './print-service-config';
 
-export type Content<T> = string | TemplateRef<T> | Type<T>;
+export type Content<T> = string | HTMLElement  | TemplateRef<T> | Type<T>;
 
 @Injectable({
   providedIn: 'root'
@@ -23,16 +23,28 @@ export type Content<T> = string | TemplateRef<T> | Type<T>;
 export class NgxPrinterService {
   private printWindowOpen = new BehaviorSubject<boolean>(false);
 
-
   private _printItems = new BehaviorSubject<PrintItem[]>([]);
   $printItems = this._printItems.asObservable();
+
+  private openNgxPrinter: HTMLElement;
 
   templateRef: TemplateRef<any>;
   componentRef: ComponentRef<any>;
   viewContainerRef: ViewContainerRef;
   dynamicElementRef: ElementRef;
 
+  /**
+   * Wait time to render before open print dialog in ms
+   * Default is 200
+   */
+  timeToWaitRender = 200;
+
+  /**
+   * Open new window to print or not
+   * Default is true
+   */
   printOpenWindow = true;
+
   $printWindowOpen = this.printWindowOpen.asObservable();
 
   constructor(
@@ -118,7 +130,9 @@ export class NgxPrinterService {
     if (this.printOpenWindow) {
       this.printInNewWindow(printContent);
     } else {
-      document.body.appendChild(printContent);
+      const nativeEl = this.createComponent(printContent).nativeElement;
+      this.openNgxPrinter = nativeEl;
+      document.body.appendChild(this.openNgxPrinter);
       this.printCurrentWindow();
     }
   }
@@ -143,19 +157,19 @@ export class NgxPrinterService {
       this.printWindowOpen.next(false);
       console.log('close print window');
       printWindow.close();
-    }, 1000);
+    }, this.timeToWaitRender);
   }
 
   /**
    * Print the whole current window
    */
   printCurrentWindow() {
-    setTimeout(function() {
+    setTimeout(() => {
       this.printWindowOpen.next(true);
       window.print();
-      window.close();
+      document.body.removeChild(this.openNgxPrinter);
       this.printWindowOpen.next(false);
-    }, 1000);
+    }, this.timeToWaitRender);
   }
 
   private resolveNgContent<T>(content: Content<T>) {
@@ -167,6 +181,10 @@ export class NgxPrinterService {
     if (content instanceof TemplateRef) {
       const viewRef = content.createEmbeddedView(null);
       return [viewRef.rootNodes];
+    }
+
+    if (content instanceof HTMLElement) {
+      return [[content]];
     }
 
     /** Otherwise it's a component */
