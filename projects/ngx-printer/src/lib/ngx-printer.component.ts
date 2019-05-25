@@ -1,7 +1,6 @@
 import {
   Component,
   OnInit,
-  HostBinding,
   Renderer2,
   ElementRef
 } from '@angular/core';
@@ -17,7 +16,7 @@ import {
   styleUrls: ['./ngx-printer.component.css']
 })
 export class NgxPrinterComponent implements OnInit {
-  @HostBinding('class')
+
   private _renderClass = 'default';
   public get renderClass() {
     return this._renderClass;
