@@ -1,7 +1,7 @@
 A simple service to print the whole window or parts of a window (div).
 Printing of Angular Templates or Components is possible.
 You can print opening a new window / tab or using the current window.
-A directive can also be used to mark and stroe an HTML-element.
+A directive can also be used to mark and store an HTML-element.
 
 See the DEMO App for examples.
 
@@ -11,6 +11,7 @@ See the DEMO App for examples.
 3. Use the the functions provided by the service
 
 ## Options
+### Open new window
 The service prints by opening a new window.
 There is an option *printWindowOpen* to change this behavoir.
 Set printWindowOpen=false;
@@ -24,6 +25,17 @@ module to the *app.module*
     NgxPrinterModule.forRoot({printOpenWindow: true})
   ],
 ```
+### Rendering time
+Before openening the print window the service to some time to render the print content.
+Default time is 200ms.
+You can adjust the time using the property *timeToWaitRender* (also in forRoot).
+
+### Default CSS-Class
+When printing to the current window the service creates an component with a
+css-class called 'default'.
+You can override this class name using the property *renderClass* (also in forRoot).
+Make sure that the class is placed in your global styles (styles.css).
+
 
 ## Functions
 ### Print current window
@@ -55,7 +67,7 @@ Otherwise use printHTMLElement instead.
 ```
 
 ## Event of print window
-If you want to check whether the print window is open or not subscribe to obserbable
+If you want to check whether the print window is open or not subscribe to observable
 *$printWindowOpen*
 
 ```javascript

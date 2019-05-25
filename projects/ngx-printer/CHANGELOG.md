@@ -1,3 +1,7 @@
+# 0.1.3
+- added option for custom css class when printing to current window
+- updated documentation
+
 # 0.1.2
 - bug fixes when printing to current window
 

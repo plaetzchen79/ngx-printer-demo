@@ -40,6 +40,11 @@ export class NgxPrinterService {
   timeToWaitRender = 200;
 
   /**
+   * Class used in component when printing to current window
+   */
+  renderClass = 'default';
+
+  /**
    * Open new window to print or not
    * Default is true
    */
@@ -52,8 +57,25 @@ export class NgxPrinterService {
     private resolver: ComponentFactoryResolver,
     private injector: Injector
   ) {
+    this.setRootConfigOptions(config);
+  }
+
+  /**
+   * Set config from forRoot
+   * @param config 
+   */
+  private setRootConfigOptions(config: PrintServiceConfig) {
     if (config) {
-      this.printOpenWindow = config.printOpenWindow;
+      if (config.printOpenWindow) {
+        this.printOpenWindow = config.printOpenWindow;
+      }
+      
+      if (config.timeToWaitRender) {
+        this.timeToWaitRender = config.timeToWaitRender;
+      }
+      if (config.renderClass) {
+        this.renderClass = config.renderClass;
+      }
     }
   }
 
@@ -117,6 +139,7 @@ export class NgxPrinterService {
     } else {
       componentRef = factory.create(this.injector);
     }
+    componentRef.instance.renderClass = this.renderClass;
     componentRef.hostView.detectChanges();
 
     return componentRef.location; // location is native element

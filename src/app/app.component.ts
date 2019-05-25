@@ -82,6 +82,14 @@ export class AppComponent {
     this.printerService.printOpenWindow = true;
   }
 
+  printHTMLElementToCurrentWithCustomCSS() {
+    this.printerService.printOpenWindow = false;
+    this.printerService.renderClass = 'current-window';
+    this.printerService.printHTMLElement(this.PrintComponent.nativeElement);
+    this.printerService.printOpenWindow = true;
+    this.printerService.renderClass = 'default';
+  }
+
 
   createComp() {
    //  this.printerService();

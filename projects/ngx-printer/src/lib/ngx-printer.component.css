@@ -1,4 +1,4 @@
-:host {
+:host.default {
     background-color: white;
     height: 100%;
     width: 100%;
@@ -6,6 +6,5 @@
     top: 0;
     left: 0;
     margin: 0;
-    line-height: 18px;
     z-index: 1000000;
 }
