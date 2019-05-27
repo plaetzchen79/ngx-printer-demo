@@ -2,11 +2,8 @@ import { PrintItem } from './print-item';
 import {
   Injectable,
   TemplateRef,
-  Renderer2,
   ComponentFactoryResolver,
-  ViewContainerRef,
   Injector,
-  ElementRef,
   Optional,
   Type
 } from '@angular/core';
@@ -17,6 +14,9 @@ import { PrintServiceConfig } from './print-service-config';
 
 export type Content<T> = string | HTMLElement  | TemplateRef<T> | Type<T>;
 
+/**
+ * Main print service
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -27,11 +27,6 @@ export class NgxPrinterService {
   $printItems = this._printItems.asObservable();
 
   private openNgxPrinter: HTMLElement;
-
-  templateRef: TemplateRef<any>;
-  componentRef: ComponentRef<any>;
-  viewContainerRef: ViewContainerRef;
-  dynamicElementRef: ElementRef;
 
   /**
    * Wait time to render before open print dialog in ms
@@ -69,7 +64,6 @@ export class NgxPrinterService {
       if (config.printOpenWindow) {
         this.printOpenWindow = config.printOpenWindow;
       }
-      
       if (config.timeToWaitRender) {
         this.timeToWaitRender = config.timeToWaitRender;
       }
@@ -146,14 +140,15 @@ export class NgxPrinterService {
   }
 
   /**
-   *
-   * @param printContent Main print function
+   * Main print function
+   * @param printContent 
    */
   private print(printContent: any) {
     if (this.printOpenWindow) {
       this.printInNewWindow(printContent);
     } else {
-      const nativeEl = this.createComponent(printContent).nativeElement;
+      const printContentClone = printContent.cloneNode(true);
+      const nativeEl = this.createComponent(printContentClone).nativeElement;
       this.openNgxPrinter = nativeEl;
       document.body.appendChild(this.openNgxPrinter);
       this.printCurrentWindow();

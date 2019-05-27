@@ -1,15 +1,8 @@
 import { NgxPrinterService } from './../../projects/ngx-printer/src/lib/ngx-printer.service';
-import {
-  Component,
-  ViewChild,
-  TemplateRef,
-  ViewContainerRef,
-  ElementRef
-} from '@angular/core';
+import { Component, ViewChild, TemplateRef, ElementRef } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { LittleDummyComponent } from './little-dummy/little-dummy.component';
 import { PrintItem } from 'projects/ngx-printer/src/lib/print-item';
-
 
 @Component({
   selector: 'app-root',
@@ -20,7 +13,7 @@ export class AppComponent {
   @ViewChild('PrintTemplate')
   private PrintTemplateTpl: TemplateRef<any>;
 
-  @ViewChild(LittleDummyComponent, {read: ElementRef})
+  @ViewChild(LittleDummyComponent, { read: ElementRef })
   PrintComponent: ElementRef;
 
   title = 'ngx-printer-demo';
@@ -28,19 +21,15 @@ export class AppComponent {
   printWindowSubscription: Subscription;
   $printItems: Observable<PrintItem[]>;
 
-  constructor(
-    private viewContainerRef: ViewContainerRef,
-    private printerService: NgxPrinterService
-  ) {
-    this.printerService.viewContainerRef = this.viewContainerRef;
-
-    this.printWindowSubscription = this.printerService.$printWindowOpen.subscribe(val => {
-      console.log('Print window is open:', val);
-    });
+  constructor(private printerService: NgxPrinterService) {
+    this.printWindowSubscription = this.printerService.$printWindowOpen.subscribe(
+      val => {
+        console.log('Print window is open:', val);
+      }
+    );
 
     this.$printItems = this.printerService.$printItems;
   }
-
 
   printDiv() {
     this.printerService.printDiv('printDiv');
@@ -88,10 +77,5 @@ export class AppComponent {
     this.printerService.printHTMLElement(this.PrintComponent.nativeElement);
     this.printerService.printOpenWindow = true;
     this.printerService.renderClass = 'default';
-  }
-
-
-  createComp() {
-   //  this.printerService();
   }
 }

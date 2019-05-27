@@ -1,3 +1,7 @@
+# 0.1.4
+- bugfix: content to be print gets deleted from dom afer printing in current window 
+- internal optimizations
+
 # 0.1.3
 - added option for custom css class when printing to current window
 - updated documentation
