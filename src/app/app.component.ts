@@ -45,6 +45,17 @@ export class AppComponent {
     this.printerService.printOpenWindow = true;
   }
 
+  printImage() {
+    this.printerService.printImg('assets/bratwurst.jpg');
+  }
+
+  printImageCurrent() {
+    this.printerService.printOpenWindow = false;
+    this.printerService.printImg('assets/bratwurst.jpg');
+    this.printerService.printOpenWindow = true;
+  }
+
+
   printComponent() {
     this.printerService.printDiv('printDiv');
   }

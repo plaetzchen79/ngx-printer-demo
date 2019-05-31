@@ -26,6 +26,18 @@ export class NgxPrinterComponent implements OnInit {
     this.setCustomClass();
   }
 
+  /**
+   * Display single image
+   */
+  private _imgSrc = 'default';
+  public get imgSrc() {
+    return this._imgSrc;
+  }
+  public set imgSrc(value) {
+    this._imgSrc = value;
+    this.addImage(this._imgSrc);
+  }
+
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {}
@@ -38,5 +50,17 @@ export class NgxPrinterComponent implements OnInit {
 
     this.renderer.removeClass(natElement, 'default');
     this.renderer.addClass(natElement, this._renderClass);
+  }
+
+  /**
+   * Add custom image
+   * @param source 
+   */
+  private addImage(source: string) {
+    const natElement = this.elementRef.nativeElement;
+
+    const newImgElement = this.renderer.createElement('img');
+    this.renderer.setAttribute(newImgElement, 'src', source);
+    this.renderer.appendChild(natElement, newImgElement);
   }
 }

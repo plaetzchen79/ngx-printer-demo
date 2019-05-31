@@ -32,7 +32,7 @@ export class NgxPrinterService {
    * Wait time to render before open print dialog in ms
    * Default is 200
    */
-  timeToWaitRender = 200;
+  timeToWaitRender = 400;
 
   /**
    * Class used in component when printing to current window
@@ -111,6 +111,15 @@ export class NgxPrinterService {
   }
 
   /**
+   * Print single img
+   */
+  public printImg(imgSrc: string) {
+    const nativeEl = this.createComponent(null, imgSrc);
+
+    this.print(nativeEl.nativeElement);
+  }
+
+  /**
    * Print native Element (HTML Element)
    * @param nativeElement
    */
@@ -122,7 +131,7 @@ export class NgxPrinterService {
    * Create and render component
    * @param contentToRender
    */
-  private createComponent(contentToRender: any): any {
+  private createComponent(contentToRender: any, imgSrc?: string): any {
     // this.viewContainerRef.clear();
     const factory = this.resolver.resolveComponentFactory(NgxPrinterComponent);
     let componentRef: any;
@@ -134,6 +143,8 @@ export class NgxPrinterService {
       componentRef = factory.create(this.injector);
     }
     componentRef.instance.renderClass = this.renderClass;
+    if (imgSrc) {  componentRef.instance.imgSrc = imgSrc; }
+
     componentRef.hostView.detectChanges();
 
     return componentRef.location; // location is native element
@@ -143,7 +154,8 @@ export class NgxPrinterService {
    * Main print function
    * @param printContent 
    */
-  private print(printContent: any) {
+  private 
+  print(printContent: any) {
     if (this.printOpenWindow) {
       this.printInNewWindow(printContent);
     } else {
@@ -164,18 +176,23 @@ export class NgxPrinterService {
     printWindow.document.write(document.documentElement.innerHTML);
 
     const printWindowDoc = printWindow.document;
+    printWindowDoc.body.style.margin = '0 0';
+    printWindowDoc.body.innerHTML = divToPrint.outerHTML;
 
-    setTimeout(() => {
-      this.printWindowOpen.next(true);
-      printWindowDoc.body.style.margin = '0 0';
-      printWindowDoc.body.innerHTML = divToPrint.outerHTML;
-      printWindowDoc.close(); // necessary for IE >= 10
-      printWindow.focus(); // necessary for IE >= 10*/
-      printWindow.print();
-      this.printWindowOpen.next(false);
-      console.log('close print window');
-      printWindow.close();
-    }, this.timeToWaitRender);
+    setTimeout(() => this.printWindow(printWindow, printWindowDoc), this.timeToWaitRender);
+  }
+
+  /**
+   * Print window in new tab
+   */
+  private printWindow(printWindow: Window, printWindowDoc: Document) {
+    this.printWindowOpen.next(true);
+    printWindowDoc.close(); // necessary for IE >= 10
+    printWindow.focus(); // necessary for IE >= 10*/
+    printWindow.print();
+    console.log('close print window');
+    printWindow.close();
+    setTimeout(() =>  { printWindow.close(); this.printWindowOpen.next(false); }, 20);
   }
 
   /**

@@ -1,3 +1,6 @@
+# 0.1.5
+- added function to print images via src directly
+
 # 0.1.4
 - bugfix: content to be print gets deleted from dom afer printing in current window 
 - internal optimizations

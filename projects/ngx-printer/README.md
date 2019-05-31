@@ -1,4 +1,4 @@
-A simple service to print the whole window or parts of a window (div).
+A easy to use service to print the window, parts of a window (div) or an image.
 Printing of Angular Templates or Components is possible.
 You can print opening a new window / tab or using the current window.
 A directive can also be used to mark and store an HTML-element.
@@ -37,12 +37,15 @@ You can override this class name using the property *renderClass* (also in forRo
 Make sure that the class is placed in your global styles (styles.css).
 
 
-## Functions
+## Functions - How to print 
 ### Print current window
 `this.printerService.printCurrentWindow();`
 
 ### Print div by id
 `this.printerService.printDiv('idOfDivToPrint');`
+
+### Print image src/url directly
+`this.printerService.printImg('assets/bratwurst.jpg');`
 
 ### Print Angular TemplateRef or Component
 ```javascript
