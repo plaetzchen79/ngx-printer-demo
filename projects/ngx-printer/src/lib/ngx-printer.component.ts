@@ -2,7 +2,9 @@ import {
   Component,
   OnInit,
   Renderer2,
-  ElementRef
+  ElementRef,
+  Output,
+  EventEmitter
 } from '@angular/core';
 
 /**
@@ -38,6 +40,8 @@ export class NgxPrinterComponent implements OnInit {
     this.addImage(this._imgSrc);
   }
 
+  @Output() completed = new EventEmitter<boolean>();
+
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {}
@@ -61,6 +65,12 @@ export class NgxPrinterComponent implements OnInit {
 
     const newImgElement = this.renderer.createElement('img');
     this.renderer.setAttribute(newImgElement, 'src', source);
+
+    this.renderer.listen(newImgElement, 'load', (evt) => {
+      console.log('loading completed', evt);
+      this.completed.emit(true);
+    });
+
     this.renderer.appendChild(natElement, newImgElement);
   }
 }

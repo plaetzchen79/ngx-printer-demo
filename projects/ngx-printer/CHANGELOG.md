@@ -1,3 +1,6 @@
+# 0.1.6
+- improved image loading when printing images
+
 # 0.1.5
 - added function to print images via src directly
 

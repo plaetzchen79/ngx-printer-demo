@@ -32,7 +32,7 @@ export class NgxPrinterService {
    * Wait time to render before open print dialog in ms
    * Default is 200
    */
-  timeToWaitRender = 400;
+  timeToWaitRender = 200;
 
   /**
    * Class used in component when printing to current window
@@ -80,7 +80,7 @@ export class NgxPrinterService {
     const divToPrint = document.getElementById(divID);
 
     if (divToPrint) {
-      this.print(divToPrint);
+      this.print(divToPrint, this.printOpenWindow);
     } else {
       console.log('div with id ${divID} not found..');
     }
@@ -94,7 +94,7 @@ export class NgxPrinterService {
     const elementToPrint = document.getElementsByClassName(className);
 
     if (elementToPrint && elementToPrint.length > 0) {
-      this.print(<HTMLScriptElement>elementToPrint[0]);
+      this.print(<HTMLScriptElement>elementToPrint[0], this.printOpenWindow);
     } else {
       console.log('element with id ${className} not found..');
     }
@@ -107,16 +107,21 @@ export class NgxPrinterService {
   public printAngular(contentToPrint: any) {
     const nativeEl = this.createComponent(contentToPrint);
 
-    this.print(nativeEl.nativeElement);
+    this.print(nativeEl.nativeElement, this.printOpenWindow);
   }
 
   /**
    * Print single img
    */
   public printImg(imgSrc: string) {
-    const nativeEl = this.createComponent(null, imgSrc);
+    const compRef = this.createComponent(null, imgSrc);
+    const openNewWindow = this.printOpenWindow;
 
-    this.print(nativeEl.nativeElement);
+    compRef.instance.completed.subscribe((val) => {
+      compRef.hostView.detectChanges();
+      console.log('completed:', val);
+      this.print(compRef.location.nativeElement, openNewWindow);
+    });
   }
 
   /**
@@ -124,7 +129,7 @@ export class NgxPrinterService {
    * @param nativeElement
    */
   public printHTMLElement(nativeElement: HTMLElement) {
-    this.print(nativeElement);
+    this.print(nativeElement, this.printOpenWindow);
   }
 
   /**
@@ -143,10 +148,12 @@ export class NgxPrinterService {
       componentRef = factory.create(this.injector);
     }
     componentRef.instance.renderClass = this.renderClass;
-    if (imgSrc) {  componentRef.instance.imgSrc = imgSrc; }
+    if (imgSrc) {
+      componentRef.instance.imgSrc = imgSrc;
+      return componentRef;
+    }
 
     componentRef.hostView.detectChanges();
-
     return componentRef.location; // location is native element
   }
 
@@ -155,8 +162,8 @@ export class NgxPrinterService {
    * @param printContent 
    */
   private 
-  print(printContent: any) {
-    if (this.printOpenWindow) {
+  print(printContent: any, printOpenWindow: boolean) {
+    if (printOpenWindow) {
       this.printInNewWindow(printContent);
     } else {
       const printContentClone = printContent.cloneNode(true);
@@ -173,12 +180,15 @@ export class NgxPrinterService {
    */
   private printInNewWindow(divToPrint: HTMLElement) {
     const printWindow = window.open('', 'PRINT');
-    printWindow.document.write(document.documentElement.innerHTML);
+    let title = document.title;
+
+    printWindow.document.write('<HTML><HEAD><TITLE>' + title + '</TITLE></HEAD><BODY></BODY></HTML>');
+    // printWindow.document.write(document.documentElement.innerHTML);
 
     const printWindowDoc = printWindow.document;
     printWindowDoc.body.style.margin = '0 0';
-    printWindowDoc.body.innerHTML = divToPrint.outerHTML;
-
+    printWindowDoc.body.appendChild(divToPrint);
+    // printWindowDoc.body.innerHTML = divToPrint.outerHTML;
     setTimeout(() => this.printWindow(printWindow, printWindowDoc), this.timeToWaitRender);
   }
 
