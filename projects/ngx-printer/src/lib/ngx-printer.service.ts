@@ -188,6 +188,7 @@ export class NgxPrinterService {
     const printWindowDoc = printWindow.document;
     printWindowDoc.body.style.margin = '0 0';
     printWindowDoc.body.appendChild(divToPrint);
+    printWindow.document.close();
     // printWindowDoc.body.innerHTML = divToPrint.outerHTML;
     setTimeout(() => this.printWindow(printWindow, printWindowDoc), this.timeToWaitRender);
   }

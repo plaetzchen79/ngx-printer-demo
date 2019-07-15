@@ -1,3 +1,6 @@
+# 0.1.7
+- no more loading spinner when printing in new window
+
 # 0.1.6
 - improved image loading when printing images
 
