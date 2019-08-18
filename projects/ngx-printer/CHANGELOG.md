@@ -1,3 +1,8 @@
+
+# 0.1.8
+- bugfix: content to be print gets deleted from dom afer printing div to new window 
+- internal optimizations
+
 # 0.1.7
 - no more loading spinner when printing in new window
 

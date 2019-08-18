@@ -161,10 +161,10 @@ export class NgxPrinterService {
    * Main print function
    * @param printContent 
    */
-  private 
-  print(printContent: any, printOpenWindow: boolean) {
+  private print(printContent: any, printOpenWindow: boolean) {
     if (printOpenWindow) {
-      this.printInNewWindow(printContent);
+      const printContentClone = printContent.cloneNode(true);
+      this.printInNewWindow(printContentClone);
     } else {
       const printContentClone = printContent.cloneNode(true);
       const nativeEl = this.createComponent(printContentClone).nativeElement;
@@ -200,7 +200,9 @@ export class NgxPrinterService {
     this.printWindowOpen.next(true);
     printWindowDoc.close(); // necessary for IE >= 10
     printWindow.focus(); // necessary for IE >= 10*/
-    printWindow.print();
+    if (printWindow.document.execCommand('print') === false) {
+      printWindow.print();
+    }
     console.log('close print window');
     printWindow.close();
     setTimeout(() =>  { printWindow.close(); this.printWindowOpen.next(false); }, 20);
@@ -212,7 +214,9 @@ export class NgxPrinterService {
   printCurrentWindow() {
     setTimeout(() => {
       this.printWindowOpen.next(true);
-      window.print();
+      if (document.execCommand('print') === false) {
+        window.print();
+      }
       document.body.removeChild(this.openNgxPrinter);
       this.printWindowOpen.next(false);
     }, this.timeToWaitRender);
