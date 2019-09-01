@@ -7,7 +7,6 @@ import {
   Optional,
   Type
 } from '@angular/core';
-import { ComponentRef } from '@angular/core/src/render3';
 import { NgxPrinterComponent } from './ngx-printer.component';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { PrintServiceConfig } from './print-service-config';
@@ -23,6 +22,9 @@ export type Content<T> = string | HTMLElement  | TemplateRef<T> | Type<T>;
 export class NgxPrinterService {
   private printWindowOpen = new BehaviorSubject<boolean>(false);
 
+  /**
+   * @internal
+   */
   private _printItems = new BehaviorSubject<PrintItem[]>([]);
   $printItems = this._printItems.asObservable();
 
@@ -75,6 +77,8 @@ export class NgxPrinterService {
 
   /***
    * Print a div identified by its id
+   * @example
+   * this.printerService.printDiv('printDiv');
    */
   public printDiv(divID: string) {
     const divToPrint = document.getElementById(divID);
@@ -87,7 +91,7 @@ export class NgxPrinterService {
   }
 
   /***
-   * Print an Element identified by its className
+   * Print an Element identified by its className using getElementsByClassName
    * Prints the first found
    */
   public printByClassName(className: string) {
@@ -101,8 +105,10 @@ export class NgxPrinterService {
   }
 
   /**
-   * Print Angular TemplateRef or Component or String
+   * Print Angular TemplateRef or a Component or String
    * @param contentToPrint
+   * @example
+   * this.printerService.printAngular(this.PrintTemplateTpl);
    */
   public printAngular(contentToPrint: any) {
     const nativeEl = this.createComponent(contentToPrint);
@@ -112,6 +118,8 @@ export class NgxPrinterService {
 
   /**
    * Print single img
+   * @example
+   * this.printerService.printImg('assets/bratwurst.jpg');
    */
   public printImg(imgSrc: string) {
     const compRef = this.createComponent(null, imgSrc);
@@ -125,8 +133,10 @@ export class NgxPrinterService {
   }
 
   /**
-   * Print native Element (HTML Element)
-   * @param nativeElement
+   * Print an native Element (HTML Element)
+   * @param nativeElement 
+   * @example
+   * this.printerService.printHTMLElement(this.PrintComponent.nativeElement);
    */
   public printHTMLElement(nativeElement: HTMLElement) {
     this.print(nativeElement, this.printOpenWindow);
@@ -247,6 +257,8 @@ export class NgxPrinterService {
 
   /**
    * Add a new item to print
+   * Used by directive
+   * @internal
    * @param newPrintItem  HTML id
    */
   public addPrintItem(newPrintItem: PrintItem): void {
@@ -257,6 +269,8 @@ export class NgxPrinterService {
 
   /**
    * Delete a print item from service
+   * Used by directive
+   * @internal
    * @param idOfItemToRemove 
    */
   public removePrintItem(idOfItemToRemove: string): void {

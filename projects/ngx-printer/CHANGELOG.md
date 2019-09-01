@@ -1,3 +1,6 @@
+# 0.2.0
+- upgraded to Angular 8
+- improved docu
 
 # 0.1.8
 - bugfix: content to be print gets deleted from dom afer printing div to new window 
