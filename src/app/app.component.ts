@@ -46,13 +46,13 @@ export class AppComponent {
   }
 
   printImage() {
+    this.printerService.printOpenWindow = true;
     this.printerService.printImg('assets/bratwurst.jpg');
   }
 
   printImageCurrent() {
     this.printerService.printOpenWindow = false;
     this.printerService.printImg('assets/bratwurst.jpg');
-    this.printerService.printOpenWindow = true;
   }
 
 

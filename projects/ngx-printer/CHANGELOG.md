@@ -1,3 +1,6 @@
+# 0.3.0
+- now uses 'afterprint' event to dectect closing print window (will not work on safari)
+
 # 0.2.0
 - upgraded to Angular 8
 - improved docu
