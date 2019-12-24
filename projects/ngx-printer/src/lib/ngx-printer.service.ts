@@ -292,9 +292,13 @@ export class NgxPrinterService {
       }, 20);
     }
     if (printOpenWindow === false) {
-      if (this.openNgxPrinter) {
+        if (!this.openNgxPrinter) {
+          return;
+        }
+        if (document.body.getElementsByTagName('ngx-printer').length === 0) {
+          return;
+        }
         document.body.removeChild(this.openNgxPrinter);
-      }
     }
   }
 

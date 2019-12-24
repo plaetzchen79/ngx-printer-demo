@@ -1,3 +1,7 @@
+
+# 0.3.1
+- bugfix: addtional exist-check before removing print element from dom
+
 # 0.3.0
 - now uses 'afterprint' event to dectect closing print window (will not work on safari)
 
