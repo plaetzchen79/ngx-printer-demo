@@ -39,6 +39,10 @@ export class AppComponent {
     this.printerService.printAngular(this.PrintTemplateTpl);
   }
 
+  printWindowCurrent() {
+    this.printerService.printCurrentWindow();
+  }
+
   printTemplateCurrent() {
     this.printerService.printOpenWindow = false;
     this.printerService.printAngular(this.PrintTemplateTpl);

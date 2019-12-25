@@ -225,7 +225,7 @@ export class NgxPrinterService {
   /**
    * Print the whole current window
    */
-  printCurrentWindow() {
+  public printCurrentWindow() {
     this.registerPrintEvent(window, false);
     setTimeout(() => {
       this.printWindowOpen.next(true);
@@ -239,7 +239,7 @@ export class NgxPrinterService {
    * Listen to print event of window
    * @param printWindow
    */
-  registerPrintEvent(printWindow: Window, printWithOpenInNewWindow: boolean) {
+  private registerPrintEvent(printWindow: Window, printWithOpenInNewWindow: boolean) {
     const that = this;
     printWindow.focus(); // necessary for IE >= 10*/
 
