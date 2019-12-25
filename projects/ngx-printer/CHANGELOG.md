@@ -1,3 +1,5 @@
+# 0.3.2
+- set internal object to null after print
 
 # 0.3.1
 - bugfix: addtional exist-check before removing print element from dom
