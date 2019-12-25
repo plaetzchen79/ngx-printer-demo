@@ -299,6 +299,7 @@ export class NgxPrinterService {
           return;
         }
         document.body.removeChild(this.openNgxPrinter);
+        this.openNgxPrinter = null;
     }
   }
 
