@@ -19,7 +19,7 @@ describe('NgxPrinterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('NgxPrinterComponent should create', () => {
     expect(component).toBeTruthy();
   });
 });

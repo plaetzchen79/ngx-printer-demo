@@ -62,7 +62,7 @@ export class NgxPrinterService {
    * Set config from forRoot
    * @param config
    */
-  private setRootConfigOptions(config: PrintServiceConfig) {
+  private setRootConfigOptions(config: PrintServiceConfig): void {
     if (config) {
       if (config.printOpenWindow) {
         this.printOpenWindow = config.printOpenWindow;
@@ -81,7 +81,7 @@ export class NgxPrinterService {
    * @example
    * this.printerService.printDiv('printDiv');
    */
-  public printDiv(divID: string) {
+  public printDiv(divID: string): void {
     const divToPrint = document.getElementById(divID);
 
     if (divToPrint) {
@@ -93,9 +93,9 @@ export class NgxPrinterService {
 
   /***
    * Print an Element identified by its className using getElementsByClassName
-   * Prints the first found
+   * Prints the first one found
    */
-  public printByClassName(className: string) {
+  public printByClassName(className: string): void {
     const elementToPrint = document.getElementsByClassName(className);
 
     if (elementToPrint && elementToPrint.length > 0) {
@@ -111,7 +111,7 @@ export class NgxPrinterService {
    * @example
    * this.printerService.printAngular(this.PrintTemplateTpl);
    */
-  public printAngular(contentToPrint: any) {
+  public printAngular(contentToPrint: any): void {
     const nativeEl = this.createComponent(contentToPrint);
 
     this.print(nativeEl.nativeElement, this.printOpenWindow);
@@ -122,7 +122,7 @@ export class NgxPrinterService {
    * @example
    * this.printerService.printImg('assets/bratwurst.jpg');
    */
-  public printImg(imgSrc: string) {
+  public printImg(imgSrc: string): void {
     const compRef = this.createComponent(null, imgSrc);
     const openNewWindow = this.printOpenWindow;
 
@@ -139,7 +139,7 @@ export class NgxPrinterService {
    * @example
    * this.printerService.printHTMLElement(this.PrintComponent.nativeElement);
    */
-  public printHTMLElement(nativeElement: HTMLElement) {
+  public printHTMLElement(nativeElement: HTMLElement): void {
     this.print(nativeElement, this.printOpenWindow);
   }
 
@@ -172,7 +172,7 @@ export class NgxPrinterService {
    * Main print function
    * @param printContent
    */
-  private print(printContent: any, printOpenWindow: boolean) {
+  private print(printContent: any, printOpenWindow: boolean): void {
     if (printOpenWindow === true) {
       const printContentClone = printContent.cloneNode(true);
       this.printInNewWindow(printContentClone);
@@ -190,7 +190,7 @@ export class NgxPrinterService {
    * Print using a new window / tab
    * @param divToPrint
    */
-  private printInNewWindow(divToPrint: HTMLElement) {
+  private printInNewWindow(divToPrint: HTMLElement): void {
     const printWindow = window.open('', 'PRINT');
     let title = document.title;
 
@@ -213,7 +213,7 @@ export class NgxPrinterService {
   /**
    * Print window in new tab
    */
-  private printTabWindow(printWindow: Window, printWindowDoc: Document) {
+  private printTabWindow(printWindow: Window, printWindowDoc: Document): void {
     this.registerPrintEvent(printWindow, true);
     this.printWindowOpen.next(true);
     printWindow.focus(); // necessary for IE >= 10*/
@@ -225,7 +225,7 @@ export class NgxPrinterService {
   /**
    * Print the whole current window
    */
-  public printCurrentWindow() {
+  public printCurrentWindow(): void {
     this.registerPrintEvent(window, false);
     setTimeout(() => {
       this.printWindowOpen.next(true);
@@ -283,7 +283,7 @@ export class NgxPrinterService {
    * Close tab or clean up dom
    * @internal
    */
-  private cleanUp(printWindow: Window, printOpenWindow: boolean) {
+  private cleanUp(printWindow: Window, printOpenWindow: boolean): void {
     if (printOpenWindow === true) {
       console.log('close print window');
       printWindow.close();
@@ -308,7 +308,7 @@ export class NgxPrinterService {
    * @param content
    * @internal
    */
-  private resolveNgContent<T>(content: Content<T>) {
+  private resolveNgContent<T>(content: Content<T>): any {
     if (typeof content === 'string') {
       const element = document.createTextNode(content);
       return [[element]];
