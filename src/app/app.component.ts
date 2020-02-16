@@ -10,10 +10,10 @@ import { PrintItem } from 'projects/ngx-printer/src/lib/print-item';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('PrintTemplate', {static: false})
+  @ViewChild('PrintTemplate')
   private PrintTemplateTpl: TemplateRef<any>;
 
-  @ViewChild(LittleDummyComponent, { static: false, read: ElementRef })
+  @ViewChild(LittleDummyComponent, { read: ElementRef })
   PrintComponent: ElementRef;
 
   title = 'ngx-printer-demo';

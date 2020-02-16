@@ -10,7 +10,7 @@ import { PrintItemDirective } from './print-item.directive';
   entryComponents: [NgxPrinterComponent]
 })
 export class NgxPrinterModule {
-  static forRoot(config: PrintServiceConfig): ModuleWithProviders {
+  static forRoot(config: PrintServiceConfig): ModuleWithProviders<NgxPrinterModule> {
     return {
       ngModule: NgxPrinterModule,
       providers: [{ provide: PrintServiceConfig, useValue: config }]
