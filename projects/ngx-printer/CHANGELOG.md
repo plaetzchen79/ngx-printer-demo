@@ -1,3 +1,6 @@
+# 0.4.0
+- upgraded to Angular 9
+
 # 0.3.2
 - set internal object to null after print
 
