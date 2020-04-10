@@ -9,3 +9,4 @@ export * from './lib/print-item';
 export * from './lib/print-item.directive';
 export * from './lib/print-item-button.directive';
 export * from './lib/print-service-config';
+export * from './lib/print-item-marker.directive';

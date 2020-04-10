@@ -93,4 +93,8 @@ export class AppComponent {
     this.printerService.printOpenWindow = true;
     this.printerService.renderClass = 'default';
   }
+
+  printerMarkerClicked() {
+    alert('Print marker clicked');
+  }
 }

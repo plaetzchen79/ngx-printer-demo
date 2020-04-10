@@ -1,5 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <h1>Welcome to ngx-printer-demo!</h1>
+<a href="#main">Main functions</a> - <a href="#pitems">List / Subject of printable items</a> - <a href="#directives">Usefull directives</a>
+<br>
+<h2 id="main">Main Functions</h2>
 <div id="printDiv" style="border: 1px solid black;">
   Div to print
   <h1>
@@ -51,7 +54,7 @@
 <br />
 <br />
 <br />
-<h2>List of print items</h2>
+<h2 id="pitems">List of print items Directive 'ngxPrintItem'</h2>
 <div *ngFor="let prinItem of $printItems | async">
   <span>{{prinItem.id}} - {{prinItem.printName}}</span>
   <button (click)="printItem(prinItem)">Print me!</button>
@@ -59,5 +62,28 @@
 </div>
 <br />
 <br />
-<h2>Print first print item from list directly with ngxPrintItemButton printItemId directive</h2>
+<h2 id="directives">Further directives</h2>
+<h3>'ngxPrintItemButton' - Print first print item from list directly with ngxPrintItemButton printItemId directive</h3>
 <button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
+
+<br />
+<br />
+<h3>'ngxPrintItemMarker' - Div to print with marker/ indicator shown</h3>
+If you click the little printer an event will be fired
+<div id="printDivMarker" ngxPrintItemMarker (printClicked)="printerMarkerClicked()" style="border: 1px solid black;">
+  Div to print
+  <h1>
+    Test div to print
+  </h1>
+  <span>Some text</span>
+</div>
+<br />
+<br />
+<h3>'ngxPrintItemMarker' - Div to print with marker and custom class 'mymarker' in styles.css</h3>
+<div id="printDivMarker" ngxPrintItemMarker customClass="mymarker" style="border: 1px solid black;">
+  Div to print
+  <h1>
+    Test div to print
+  </h1>
+  <span>Some text</span>
+</div>
