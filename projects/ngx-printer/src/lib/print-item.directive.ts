@@ -17,7 +17,7 @@ export class PrintItemDirective implements OnInit, OnDestroy {
    */
   @Input()
   printName: string;
-  
+
   constructor(private el: ElementRef, private printerService: NgxPrinterService) {
   }
 
@@ -31,7 +31,7 @@ export class PrintItemDirective implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     if (this.el.nativeElement.id) {
       this.printerService.removePrintItem( this.el.nativeElement.id);
     }

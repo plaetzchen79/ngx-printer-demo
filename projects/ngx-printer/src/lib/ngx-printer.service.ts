@@ -355,6 +355,19 @@ export class NgxPrinterService {
     this._printItems.next(newIitems);
   }
 
+    /**
+   * Gets a single print item from service
+   * Used by directive
+   * @internal
+   * @param idOfItemToFind
+   */
+  public getPrintItem(idOfItemToRemove: string): PrintItem {
+    const tmpItems = this._printItems.getValue();
+    const foundItem = tmpItems.find(item => item.id === idOfItemToRemove);
+    return foundItem;
+  }
+
+
   /**
    * Print a print Item
    * @param printItemToPrint

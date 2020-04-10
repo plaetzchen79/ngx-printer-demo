@@ -2,11 +2,12 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { NgxPrinterComponent } from './ngx-printer.component';
 import { PrintServiceConfig } from './print-service-config';
 import { PrintItemDirective } from './print-item.directive';
+import { PrintItemButtonDirective } from './print-item-button.directive';
 
 @NgModule({
-  declarations: [NgxPrinterComponent, PrintItemDirective],
+  declarations: [NgxPrinterComponent, PrintItemDirective, PrintItemButtonDirective],
   imports: [],
-  exports: [NgxPrinterComponent, PrintItemDirective],
+  exports: [NgxPrinterComponent, PrintItemDirective, PrintItemButtonDirective],
   entryComponents: [NgxPrinterComponent]
 })
 export class NgxPrinterModule {

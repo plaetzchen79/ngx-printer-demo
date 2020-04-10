@@ -1,6 +1,6 @@
 
 /**
- * A class to stroe an item which can be printed
+ * A class to store an item which can be printed
  */
 export class PrintItem {
   /**

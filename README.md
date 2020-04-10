@@ -105,6 +105,13 @@ TS:
 });
 ```
 
+## Directive ngxPrintItemButton
+If you want to print a single item from the list of ngxPrintItems (see above) without ts you can use the diretive ngxPrintItemButton. You have to know the id of the printItem.
+
+```html
+<button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

@@ -101,3 +101,10 @@ TS:
     this.printerService.printPrintItem(itemToPrint);
   }
 });
+
+## Directive ngxPrintItemButton
+If you want to print a single item from the list of ngxPrintItems (see above) without ts you can use the diretive ngxPrintItemButton. You have to know the id of the printItem.
+
+```html
+<button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
+```

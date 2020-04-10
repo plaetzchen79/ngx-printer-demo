@@ -1,3 +1,6 @@
+# 0.4.1
+- added directive NgxPrinterButton
+
 # 0.4.0
 - upgraded to Angular 9
 
