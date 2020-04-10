@@ -74,7 +74,7 @@ If you want to check whether the print window is open or not subscribe to observ
 *$printWindowOpen*
 
 ```javascript
-this.printWindowSunscription = this.printerService.$printWindowOpen.subscribe(val => {
+this.printWindowSubscription = this.printerService.$printWindowOpen.subscribe(val => {
       console.log('Print window is open:', val);
 });
 ```
@@ -110,3 +110,24 @@ HTML:
 ```html
 <button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
 ```
+
+## Directive ngxPrintItemMarker
+If you want to indicate an item as printable you can use this directive.
+The default class adds a little printer symbol to the top left of the html element.
+
+### Customization
+You can override the default class with the `customClass` property.
+Make sure that the css class is globally accessable e.g. put it into "styles.css".
+You can also only override the image using the property `backgroundImage`. You can
+speficy the data for the *background-url*.
+
+### Event 
+You can listen to the event 'printClicked'.
+
+HTML:
+```html
+<div id="printDivMarker" ngxPrintItemMarker (printClicked)="printerMarkerClicked()">
+
+<div id="printDivMarker" ngxPrintItemMarker customClass="mymarker" >
+```
+
