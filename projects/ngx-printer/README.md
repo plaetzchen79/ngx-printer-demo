@@ -3,6 +3,8 @@ Printing of Angular Templates or Components is possible.
 You can print opening a new window / tab or using the current window.
 A directive can also be used to mark and store an HTML-element.
 
+Several usefull directives can further assist you.
+
 See the DEMO App for examples.
 
 # Usage
@@ -70,7 +72,7 @@ Otherwise use printHTMLElement instead.
 ```
 
 ## Event of print window
-If you want to check whether the print window is open or not subscribe to observable
+If you want to check whether the print window is open or not you can subscribe to observable
 *$printWindowOpen*
 
 ```javascript

@@ -13,3 +13,11 @@ button:hover {
   color: white;
 }
 
+a {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}

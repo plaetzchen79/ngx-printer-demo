@@ -1,5 +1,8 @@
-# 0.4.1
-- added directive NgxPrinterButton
+# 0.5.0
+- new directives to make life easier:
+    - added new directive NgxPrinterButton
+    - added new directive NgxPrinterMarker
+- updated to Angular 9.1
 
 # 0.4.0
 - upgraded to Angular 9

@@ -6,6 +6,8 @@ Printing of Angular Templates or Components is possible.
 You can print opening a new window / tab or using the current window.
 A directive can also be used to mark and store an HTML-element.
 
+Several usefull directives can further assist you.
+
 Start the demo app with *ng serve*.
 
 # Usage
