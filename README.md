@@ -115,6 +115,10 @@ The Click-Event to print the item will be automatically set.
 <button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
 ```
 
+## Directive ngxPrintItemMarker
+If you want to indicate that an item is printable just use this directive.
+A little printer image will be displayed at the top left of the html item.
+
 ### Customization
 You can override the default class with the `customClass` property.
 Make sure that the css class is globally accessable e.g. put it into "styles.css".
