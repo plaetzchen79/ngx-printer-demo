@@ -116,8 +116,8 @@ The Click-Event to print the item will be automatically set.
 ```
 
 ## Directive ngxPrintItemMarker
-If you want to indicate that an item is printable just use this directive.
-A little printer image will be displayed at the top left of the html item.
+If you want to indicate an item as printable you can use this directive.
+The default class adds a little printer symbol to the top left of the html element.
 
 ### Customization
 You can override the default class with the `customClass` property.
