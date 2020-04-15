@@ -10,6 +10,7 @@ import {
 import { NgxPrinterComponent } from './ngx-printer.component';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { PrintServiceConfig } from './print-service-config';
+import { PdfPrinter } from './pdf-printer';
 
 export type Content<T> = string | HTMLElement | TemplateRef<T> | Type<T>;
 
@@ -131,6 +132,10 @@ export class NgxPrinterService {
       console.log('completed:', val);
       this.print(compRef.location.nativeElement, openNewWindow);
     });
+  }
+
+  public printPdf(pdfSrc: string): void {
+    const pdfprinter = new PdfPrinter(pdfSrc);
   }
 
   /**

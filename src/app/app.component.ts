@@ -54,6 +54,11 @@ export class AppComponent {
     this.printerService.printImg('assets/bratwurst.jpg');
   }
 
+  printPdf() {
+    this.printerService.printOpenWindow = true;
+    this.printerService.printPdf('assets/gez.pdf');
+  }
+
   printImageCurrent() {
     this.printerService.printOpenWindow = false;
     this.printerService.printImg('assets/bratwurst.jpg');
