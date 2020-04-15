@@ -18,6 +18,13 @@ a {
   cursor: pointer;
 }
 
+textarea {
+  width: 80%;
+  border: none;
+  font-weight: lighter;
+  margin: 10px;
+}
+
 * {
   font-family: Arial, Helvetica, sans-serif;
 }

@@ -1,15 +1,26 @@
-import { Directive, ElementRef, Renderer2, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Renderer2,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import { NgxPrinterService } from './ngx-printer.service';
 
 /**
  * Mark an div as printable
  */
 @Directive({
-  selector: '[ngxPrintItemMarker]'
+  selector: '[ngxPrintItemMarker]',
 })
 export class PrintItemMarkerDirective implements OnInit {
-
   @Input()
   customClass = '';
+
+  @Input()
+  directPrint = false;
 
   /**
    * Data for an svg image used as background url
@@ -27,29 +38,45 @@ export class PrintItemMarkerDirective implements OnInit {
     width: '16px',
     position: 'absolute ',
     left: '1px',
-    top: '1px'
+    top: '1px',
   };
 
   /**
    * Event fired when marker clicked
    * @emits
    */
-  @Output() 
+  @Output()
   printClicked = new EventEmitter<any>();
 
-  constructor(private el: ElementRef, private renderer2: Renderer2) {
-  }
+  constructor(
+    private el: ElementRef,
+    private renderer2: Renderer2,
+    private printerService: NgxPrinterService
+  ) {}
 
   ngOnInit() {
-    let newIndicator = document.createElement('div');
+    const newIndicator = document.createElement('div');
 
     this.addIndicatorDiv(this.el, newIndicator);
 
     newIndicator.addEventListener('click', () => {
+      if (this.directPrint) {
+        const elementToPrint = this.el.nativeElement.getElementsByClassName(
+          'print_indicator'
+        );
+
+        if (elementToPrint && elementToPrint.length > 0) {
+          this.renderer2.setStyle(elementToPrint[0], 'visibility', 'hidden');
+          this.printerService.printHTMLElement(this.el.nativeElement);
+          this.renderer2.setStyle(elementToPrint[0], 'visibility', 'visible');
+        } else {
+          console.log('element with id ${className} not found..');
+        }
+      }
       this.printClicked.emit(true);
     });
   }
-  
+
   /**
    * Change and add div with Indicator
    * @param el
@@ -57,6 +84,7 @@ export class PrintItemMarkerDirective implements OnInit {
    */
   private addIndicatorDiv(el: ElementRef<any>, newIndicator: HTMLDivElement) {
     const natElement = el.nativeElement;
+    this.renderer2.addClass(newIndicator, 'print_indicator');
     this.renderer2.setStyle(natElement, 'position', 'relative');
     this.renderer2.appendChild(el.nativeElement, newIndicator);
     if (this.customClass === '') {
@@ -68,10 +96,10 @@ export class PrintItemMarkerDirective implements OnInit {
 
   /**
    * Set the default css properties
-   * @param newIndicator 
+   * @param newIndicator
    */
   private setCss(newIndicator: HTMLDivElement) {
-    Object.keys(this.newStyles).forEach(element => {
+    Object.keys(this.newStyles).forEach((element) => {
       newIndicator.style.setProperty(`${element}`, this.newStyles[element]);
     });
     const imgUrl = 'url(' + this.backgroundImage + ')';

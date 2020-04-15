@@ -1,8 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <h1>Welcome to ngx-printer-demo!</h1>
-<a href="#main">Main print functions</a> - <a href="#pitems">List / Subject of printable items</a> - <a href="#directives">Usefull directives</a>
-<br/>
-<br/>
+<a href="#main">Main print functions</a> -
+<a href="#pitems">List / Subject of printable items</a> -
+<a href="#directives">Usefull directives</a>
+<br />
+<br />
 <h2 id="main">Main Functions</h2>
 <div id="printDiv" style="border: 1px solid black;">
   Div to print
@@ -14,7 +16,7 @@
 
 <br />
 <little-dummy></little-dummy>
- 
+
 <br />
 <ng-template #PrintTemplate>
   Template
@@ -25,9 +27,13 @@
 </ng-template>
 
 <br />
-<span id="firstPrintItem" ngxPrintItem printName="First one" >A <b>first</b> span with an ngxPrintItem directive</span>
+<span id="firstPrintItem" ngxPrintItem printName="First one"
+  >A <b>first</b> span with an ngxPrintItem directive</span
+>
 <br />
-<span id="secondPrintItem" ngxPrintItem printName="Second one"  >A <b>second</b> span with an ngxPrintItem directive</span>
+<span id="secondPrintItem" ngxPrintItem printName="Second one"
+  >A <b>second</b> span with an ngxPrintItem directive</span
+>
 <br />
 <br />
 <button (click)="printWindowCurrent()">Print whole current window</button>
@@ -37,16 +43,37 @@
 <button (click)="printDivToCurrent()">Print div to current window</button>
 <br />
 <br />
-<button (click)="printHTMLElementToCurrent()">Print component as native Element to current window</button>
-<button (click)="printHTMLElementToCurrentWithCustomCSS()">Print component  to current window with custom css</button>
+<button (click)="printHTMLElementToCurrent()">
+  Print component as native Element to current window
+</button>
+<button (click)="printHTMLElementToCurrentWithCustomCSS()">
+  Print component to current window with custom css
+</button>
 <br />
 <br />
 <button (click)="printTemplate()">Print template</button>
-<button (click)="printTemplateCurrent()">Print template to current window</button>
+<button (click)="printTemplateCurrent()">
+  Print template to current window
+</button>
 <br />
 <br />
 <button (click)="printImage()">Print image</button>
 <button (click)="printImageCurrent()">Print image to current window</button>
+<br/>
+<br/>
+<textarea disabled="true">
+<span id="firstPrintItem" ngxPrintItem printName="First one" ></span>
+<span id="secondPrintItem" ngxPrintItem printName="Second one" ></span>
+<button (click)="printWindowCurrent()">Print whole current window</button>
+<button (click)="printDiv()">Print div</button>
+<button (click)="printDivToCurrent()">Print div to current window</button>
+<button (click)="printHTMLElementToCurrent()">Print component as native Element to current window</button>
+<button (click)="printHTMLElementToCurrentWithCustomCSS()">Print component  to current window with custom css</button>
+<button (click)="printTemplate()">Print template</button>
+<button (click)="printTemplateCurrent()">Print template to current window</button>
+<button (click)="printImage()">Print image</button>
+<button (click)="printImageCurrent()">Print image to current window</button>
+</textarea>
 <!-- <br />
 <br />
 <button (click)="createComp()">Create Compoennt</button> 
@@ -57,34 +84,80 @@
 <br />
 <h2 id="pitems">List of print items Directive 'ngxPrintItem'</h2>
 <div *ngFor="let prinItem of $printItems | async">
-  <span>{{prinItem.id}} - {{prinItem.printName}}</span>
+  <span>{{ prinItem.id }} - {{ prinItem.printName }}</span>
   <button (click)="printItem(prinItem)">Print me!</button>
-  <button (click)="printItemCurrent(prinItem)">Print me to current window!</button>
+  <button (click)="printItemCurrent(prinItem)">
+    Print me to current window!
+  </button>
 </div>
 <br />
 <br />
 <h2 id="directives">Further directives</h2>
-<h3>'ngxPrintItemButton' - Print first print item from list directly with ngxPrintItemButton printItemId directive</h3>
-<button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
+<h3>ngxPrintItemButton</h3>
+<h4>
+  Print first print item from list directly with ngxPrintItemButton printItemId
+  directive
+</h4>
+<textarea disabled="true" rows="1">
+  <button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
+</textarea>
+<br />
+<button ngxPrintItemButton printItemId="firstPrintItem">
+  Print first item directly
+</button>
 
 <br />
 <br />
-<h3>'ngxPrintItemMarker' - Div to print with marker/ indicator shown</h3>
+<h3>ngxPrintItemMarker</h3>
+<h4>Div to print with marker/ indicator shown and Event '(printClicked)'</h4>
 If you click the little printer an event will be fired
-<div id="printDivMarker" ngxPrintItemMarker (printClicked)="printerMarkerClicked()" style="border: 1px solid black;">
+<textarea disabled="true" rows="1">
+  <div ngxPrintItemMarker (printClicked)="printerMarkerClicked()">
+</textarea>
+<div
+  id="printDivMarker1"
+  ngxPrintItemMarker
+  (printClicked)="printerMarkerClicked()"
+  style="border: 1px solid black;"
+>
   Div to print
   <h1>
     Test div to print
   </h1>
-  <span>Some text</span>
 </div>
 <br />
 <br />
-<h3>'ngxPrintItemMarker' - Div to print with marker and custom class 'mymarker' in styles.css</h3>
-<div id="printDivMarker" ngxPrintItemMarker customClass="mymarker" style="border: 1px solid black;">
+<h4>Div to print with marker/ indicator shown and option 'directPrint=true'</h4>
+If you click the little printer print starts immediatly
+<textarea disabled="true" rows="1">
+  <div ngxPrintItemMarker directPrint="true"></div>
+</textarea>
+<div
+  id="printDivMarker2"
+  ngxPrintItemMarker
+  directPrint="true"
+  style="border: 1px solid black;"
+>
   Div to print
   <h1>
     Test div to print
   </h1>
-  <span>Some text</span>
+</div>
+<br />
+<br />
+<h4>Div to print with marker and custom class customClass='mymarker'</h4>
+The class mymarker is placed in global styles.css
+<textarea disabled="true" rows="1">
+  <div  ngxPrintItemMarker  customClass="mymarker"></div>
+</textarea>
+<div
+  id="printDivMarker3"
+  ngxPrintItemMarker
+  customClass="mymarker"
+  style="border: 1px solid black;"
+>
+  Div to print
+  <h1>
+    Test div to print
+  </h1>
 </div>

@@ -12,6 +12,13 @@ See the DEMO App for examples.
 2. Use the *NgxPrinterService* where you like via DI (private printerService: NgxPrinterService)
 3. Use the the functions provided by the service
 
+The easiest way to print an HTML Element is 
+HTML:
+```html
+<div ngxPrintItemMarker directPrint="true"></div>
+```
+ 
+
 ## Options
 ### Open new window
 The service prints by opening a new window.
