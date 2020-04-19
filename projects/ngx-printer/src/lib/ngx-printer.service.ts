@@ -50,6 +50,9 @@ export class NgxPrinterService {
   $printWindowOpen = this.printWindowOpen.asObservable();
   eventadded = [];
 
+  appRoot: HTMLElement;
+  appRootDislaySetting = '';
+
   constructor(
     @Optional() config: PrintServiceConfig,
     private resolver: ComponentFactoryResolver,
@@ -182,6 +185,12 @@ export class NgxPrinterService {
       const nativeEl = this.createComponent(printContentClone).nativeElement;
       this.openNgxPrinter = nativeEl;
       document.body.appendChild(this.openNgxPrinter);
+      window.scrollTo(0, 0);
+      this.getAppRoot();
+      if (this.appRoot) {
+        this.appRoot.style.display = 'none';
+      }
+
       this.printCurrentWindow();
     }
   }
@@ -298,6 +307,15 @@ export class NgxPrinterService {
         if (document.body.getElementsByTagName('ngx-printer').length === 0) {
           return;
         }
+       
+        if (this.appRoot) {
+          if (this.appRootDislaySetting !== '') {
+            this.appRoot.style.display = this.appRootDislaySetting;
+          } else {
+            this.appRoot.style.display = '';
+          }
+        }
+
         document.body.removeChild(this.openNgxPrinter);
         this.openNgxPrinter = null;
     }
@@ -329,6 +347,20 @@ export class NgxPrinterService {
     const componentRef = factory.create(this.injector);
     componentRef.changeDetectorRef.detectChanges();
     return [[componentRef.location.nativeElement]];
+  }
+
+  /**
+   * Search Angular App Root
+   * @internal
+   */
+  private getAppRoot(): void {
+    const appRoot = document.body.getElementsByTagName('app-root');
+    if (appRoot.length === 0) {
+      return null;
+    } else {
+      this.appRoot = <HTMLElement> appRoot[0];
+      this.appRootDislaySetting = this.appRoot.style.display;
+    }
   }
 
   /**

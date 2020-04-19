@@ -10,7 +10,7 @@ import {
 import { NgxPrinterService } from './ngx-printer.service';
 
 /**
- * Mark an div as printable
+ * Mark an div as printable and provide direct print function
  */
 @Directive({
   selector: '[ngxPrintItemMarker]',
@@ -70,7 +70,7 @@ export class PrintItemMarkerDirective implements OnInit {
           this.printerService.printHTMLElement(this.el.nativeElement);
           this.renderer2.setStyle(elementToPrint[0], 'visibility', 'visible');
         } else {
-          console.log('element with id ${className} not found..');
+          console.log('element with indicator class not found..');
         }
       }
       this.printClicked.emit(true);

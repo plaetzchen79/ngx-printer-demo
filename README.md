@@ -15,6 +15,13 @@ Start the demo app with *ng serve*.
 2. Use the *NgxPrinterService* where you like via DI (private printerService: NgxPrinterService)
 3. Use the the functions provided by the service
 
+**Easy start**
+The easiest way to print an HTML Element is 
+HTML:
+```html
+<div ngxPrintItemMarker directPrint="true"></div>
+```
+
 ## Options
 ### Open new window
 The service prints by opening a new window.
@@ -118,6 +125,22 @@ The Click-Event to print the item will be automatically set.
 ## Directive ngxPrintItemMarker
 If you want to indicate an item as printable you can use this directive.
 The default class adds a little printer symbol to the top left of the html element.
+
+### Show marker/icon
+Just display marker.
+
+HTML:
+```html
+<div ngxPrintItemMarker>
+```
+
+### Print after marker click
+If you click the little printer print starts immediately.
+
+HTML:
+```html
+<div ngxPrintItemMarker directPrint="true"></div>
+```
 
 ### Customization
 You can override the default class with the `customClass` property.

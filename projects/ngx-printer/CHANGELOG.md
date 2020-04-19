@@ -1,3 +1,8 @@
+# 0.5.1
+- function directPrint for PrinterMarker directive 
+- improved printing to same window when window is scrolled
+- improved demo app
+
 # 0.5.0
 - new directives to make life easier:
     - added new directive NgxPrinterButton

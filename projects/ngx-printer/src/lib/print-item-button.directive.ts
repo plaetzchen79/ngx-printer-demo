@@ -3,7 +3,7 @@ import { NgxPrinterService } from './ngx-printer.service';
 import { PrintItem } from './print-item';
 
 /**
- * Directly add functio to a button to print an item
+ * Directly add function to a button to print an item
  */
 @Directive({
   selector: '[ngxPrintItemButton]'

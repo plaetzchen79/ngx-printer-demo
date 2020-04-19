@@ -2,7 +2,6 @@ A easy to use service to print the window, parts of a window (div) or an image.
 Printing of Angular Templates or Components is possible.
 You can print opening a new window / tab or using the current window.
 A directive can also be used to mark and store an HTML-element.
-
 Several usefull directives can further assist you.
 
 See the DEMO App for examples.
@@ -12,6 +11,7 @@ See the DEMO App for examples.
 2. Use the *NgxPrinterService* where you like via DI (private printerService: NgxPrinterService)
 3. Use the the functions provided by the service
 
+**Easy start**
 The easiest way to print an HTML Element is 
 HTML:
 ```html
@@ -124,6 +124,22 @@ HTML:
 ## Directive ngxPrintItemMarker
 If you want to indicate an item as printable you can use this directive.
 The default class adds a little printer symbol to the top left of the html element.
+
+### Show marker/icon
+Just display marker.
+
+HTML:
+```html
+<div ngxPrintItemMarker>
+```
+
+### Print after marker click
+If you click the little printer print starts immediately.
+
+HTML:
+```html
+<div ngxPrintItemMarker directPrint="true"></div>
+```
 
 ### Customization
 You can override the default class with the `customClass` property.
