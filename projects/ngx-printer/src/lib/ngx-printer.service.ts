@@ -185,7 +185,7 @@ export class NgxPrinterService {
       const nativeEl = this.createComponent(printContentClone).nativeElement;
       this.openNgxPrinter = nativeEl;
       document.body.appendChild(this.openNgxPrinter);
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
       this.getAppRoot();
       if (this.appRoot) {
         this.appRoot.style.display = 'none';
