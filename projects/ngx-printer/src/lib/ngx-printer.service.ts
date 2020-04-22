@@ -47,11 +47,18 @@ export class NgxPrinterService {
    */
   printOpenWindow = true;
 
-  $printWindowOpen = this.printWindowOpen.asObservable();
-  eventadded = [];
+  /**
+   * Name of root component
+   * Default is app-root
+   */
+  appRootName = 'app-root';
 
   appRoot: HTMLElement;
   appRootDislaySetting = '';
+
+  $printWindowOpen = this.printWindowOpen.asObservable();
+  eventadded = [];
+
 
   constructor(
     @Optional() config: PrintServiceConfig,
@@ -75,6 +82,9 @@ export class NgxPrinterService {
       }
       if (config.renderClass) {
         this.renderClass = config.renderClass;
+      }
+      if (config.appRootName) {
+        this.appRootName = config.appRootName;
       }
     }
   }
@@ -328,11 +338,11 @@ export class NgxPrinterService {
   }
 
   /**
-   * Search Angular App Root
+   * Search for Angular App Root
    * @internal
    */
   private getAppRoot(): void {
-    const appRoot = document.body.getElementsByTagName('app-root');
+    const appRoot = document.body.getElementsByTagName(this.appRootName);
     if (appRoot.length === 0) {
       return null;
     } else {

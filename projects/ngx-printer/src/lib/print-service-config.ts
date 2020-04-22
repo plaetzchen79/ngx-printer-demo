@@ -10,4 +10,7 @@ export class PrintServiceConfig {
 
   /** Class name to be used when printing in current window */
   renderClass?: string;
+
+  /* Name ofapp route component - usally 'app-root' used by print to same window */
+  appRootName ?  = 'app-root';
 }
