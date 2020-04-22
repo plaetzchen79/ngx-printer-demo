@@ -39,6 +39,7 @@ export class PrintItemMarkerDirective implements OnInit {
     position: 'absolute ',
     left: '1px',
     top: '1px',
+    cursor: 'pointer'
   };
 
   /**
