@@ -264,28 +264,6 @@ export class NgxPrinterService {
       that.cleanUp(printWindow, printWithOpenInNewWindow);
       that.printWindowOpen.next(false);
     });
-
-/*
-  let mediaQueryList: MediaQueryList = null; 
-
-  if (window.matchMedia) {
-      mediaQueryList = printWindow.matchMedia('print') as MediaQueryList;
-        this.eventadded[printWindow.name] = true;
-        mediaQueryList.addListener(function(mql) {
-          console.log(mql);
-          if (mql.matches) {
-            console.log('webkit equivalent of onbeforeprint');
-          }
-          if (!mql.matches) {
-            console.log('webkit equivalent of afterprint');
-            if (printWithOpenInNewWindow) {
-              that.eventadded[printWindow.name] = false;
-            }
-            that.cleanUp(printWindow, printWithOpenInNewWindow);
-            that.printWindowOpen.next(false);
-          }
-        });
-      } */
   }
 
   /**
