@@ -1,3 +1,6 @@
+# 0.5.2
+- extends config with property appRootName
+
 # 0.5.1
 - function directPrint for PrinterMarker directive 
 - improved printing to same window when window is scrolled

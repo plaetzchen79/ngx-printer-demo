@@ -45,6 +45,8 @@ css-class called 'default'.
 You can override this class name using the property *renderClass* (also in forRoot).
 Make sure that the class is placed in your global styles (styles.css).
 
+### Name of app-root
+When printing to the current window the service searches the app-root component. If you have changed the name of the root component in your app you can override the name using the property *appRootName*.
 
 ## Functions - How to print 
 ### Print current window
