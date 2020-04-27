@@ -197,7 +197,7 @@ export class NgxPrinterService {
    */
   private printInNewWindow(divToPrint: HTMLElement): void {
     const printWindow = window.open('', 'PRINT');
-    let title = document.title;
+    const title = document.title;
 
     printWindow.document.write(
       '<HTML><HEAD><TITLE>' + title + '</TITLE></HEAD><BODY></BODY></HTML>'
