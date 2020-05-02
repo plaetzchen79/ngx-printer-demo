@@ -3,6 +3,7 @@ import { Component, ViewChild, TemplateRef, ElementRef } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { LittleDummyComponent } from './little-dummy/little-dummy.component';
 import { PrintItem } from 'projects/ngx-printer/src/lib/print-item';
+import { ngxPrintMarkerPosition } from 'projects/ngx-printer/src/public_api';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +53,12 @@ export class AppComponent {
   printImage() {
     this.printerService.printOpenWindow = true;
     this.printerService.printImg('assets/bratwurst.jpg');
+  }
+
+  printImage2() {
+    const printContent = <HTMLImageElement> document.getElementById('imId2');
+    this.printerService.printOpenWindow = true;
+    this.printerService.printImg(printContent.src);
   }
 
   printImageCurrent() {

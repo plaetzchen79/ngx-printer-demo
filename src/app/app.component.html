@@ -161,3 +161,17 @@ The class mymarker is placed in global styles.css
     Test div to print
   </h1>
 </div>
+
+<br />
+<br />
+<h4>Direct print an inplace image with marker</h4>
+
+<div ngxPrintItemMarker directPrint="true" style="width: 130px; height: 100px;">
+  <img id="imId2" src="assets/bratwurst.jpg" style="width: 100%; height: 100%;"/>
+</div>
+
+<textarea disabled="true" rows="1">
+  <div ngxPrintItemMarker directPrint="true">
+    <img id="imId2" src="assets/bratwurst.jpg" style="width: 130px; height: 100px;"/>
+  </div>
+</textarea>

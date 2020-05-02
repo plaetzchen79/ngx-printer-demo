@@ -12,6 +12,7 @@ See the DEMO App for examples.
 3. Use the the functions provided by the service
 
 **Easy start**
+
 The easiest way to print an HTML Element is 
 HTML:
 ```html
@@ -47,6 +48,10 @@ Make sure that the class is placed in your global styles (styles.css).
 
 ### Name of app-root
 When printing to the current window the service searches the app-root component. If you have changed the name of the root component in your app you can override the name using the property *appRootName*.
+
+### Position of image for directive 'ngxPrintItemMarker'
+The maker image is placed to the bottom left. You can change this by changing the
+property *markerPosition*. Use a value of the enum  *ngxPrintMarkerPosition* (TopLeft, .TopRight, .BottomLeft, .BottomRight).
 
 ## Functions - How to print 
 ### Print current window

@@ -1,3 +1,4 @@
+import { ngxPrintMarkerPosition } from './ngx-print-marker-position.enum';
 import { PrintItem } from './print-item';
 import {
   Injectable,
@@ -58,6 +59,7 @@ export class NgxPrinterService {
 
   $printWindowOpen = this.printWindowOpen.asObservable();
   eventadded = [];
+  markerPosition: ngxPrintMarkerPosition;
 
 
   constructor(
@@ -85,6 +87,9 @@ export class NgxPrinterService {
       }
       if (config.appRootName) {
         this.appRootName = config.appRootName;
+      }
+      if (config.markerPosition) {
+        this.markerPosition = config.markerPosition;
       }
     }
   }
@@ -211,7 +216,7 @@ export class NgxPrinterService {
    */
   private printInNewWindow(divToPrint: HTMLElement): void {
     const printWindow = window.open('', 'PRINT');
-    let title = document.title;
+    const title = document.title;
 
     printWindow.document.write(
       '<HTML><HEAD><TITLE>' + title + '</TITLE></HEAD><BODY></BODY></HTML>'
