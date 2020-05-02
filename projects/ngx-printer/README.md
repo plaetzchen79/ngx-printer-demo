@@ -4,7 +4,7 @@ You can print opening a new window / tab or using the current window.
 A directive can also be used to mark and store an HTML-element.
 Several usefull directives can further assist you.
 
-See the DEMO App for examples.
+See the DEMO App and [DEMO-Page](https://plaetzchen79.github.io/) for examples.
 
 # Usage
 1. Add to main *app.module* imports

@@ -1,5 +1,6 @@
 # 0.5.3
 - extends config with property 'markerPosition' and the proper enum 'ngxPrintMarkerPosition'
+- public demo page
 
 # 0.5.2
 - extends config with property appRootName
