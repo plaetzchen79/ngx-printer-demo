@@ -5,13 +5,13 @@
 <a href="#directives">Usefull directives</a>
 <br />
 <br />
-<h2 id="main">Main Functions</h2>
+<h2 id="main">-- Main print functions --</h2>
 <div id="printDiv" style="border: 1px solid black;">
   Div to print
   <h1>
     Test div to print
   </h1>
-  <span>Some text</span>
+  <span>Vfl Bochum 1848</span>
 </div>
 
 <br />
@@ -25,15 +25,6 @@
   </h1>
   <span>Some text</span>
 </ng-template>
-
-<br />
-<span id="firstPrintItem" ngxPrintItem printName="First one"
-  >A <b>first</b> span with an ngxPrintItem directive</span
->
-<br />
-<span id="secondPrintItem" ngxPrintItem printName="Second one"
-  >A <b>second</b> span with an ngxPrintItem directive</span
->
 <br />
 <br />
 <button (click)="printWindowCurrent()">Print whole current window</button>
@@ -81,18 +72,34 @@
 -->
 <br />
 <br />
+<hr>
+<h2 id="pitems">-- List / Subject of printable items - Directive 'ngxPrintItem' --</h2>
+
+<span id="firstPrintItem" ngxPrintItem printName="First one"
+  >A <b>first</b> span with an ngxPrintItem directive</span
+>
 <br />
-<h2 id="pitems">List of print items Directive 'ngxPrintItem'</h2>
+<span id="secondPrintItem" ngxPrintItem printName="Second one"
+  >A <b>second</b> span with an ngxPrintItem directive</span
+>
+<br />
+<br />
 <div *ngFor="let prinItem of $printItems | async">
   <span>{{ prinItem.id }} - {{ prinItem.printName }}</span>
+  <br />
   <button (click)="printItem(prinItem)">Print me!</button>
   <button (click)="printItemCurrent(prinItem)">
     Print me to current window!
   </button>
 </div>
+<textarea disabled="true" rows="2">
+  <span id="secondPrintItem" ngxPrintItem printName="Second one"
+  >A <b>second</b> span with an ngxPrintItem directive</span>
+</textarea>
 <br />
 <br />
-<h2 id="directives">Further directives</h2>
+<hr>
+<h2 id="directives">-- Usefull directives --</h2>
 <h3>ngxPrintItemButton</h3>
 <h4>
   Print first print item from list directly with ngxPrintItemButton printItemId
@@ -170,7 +177,7 @@ The class mymarker is placed in global styles.css
   <img id="imId2" src="assets/bratwurst.jpg" style="width: 100%; height: 100%;"/>
 </div>
 
-<textarea disabled="true" rows="1">
+<textarea disabled="true" rows="3">
   <div ngxPrintItemMarker directPrint="true">
     <img id="imId2" src="assets/bratwurst.jpg" style="width: 130px; height: 100px;"/>
   </div>

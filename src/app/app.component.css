@@ -18,6 +18,12 @@ a {
   cursor: pointer;
 }
 
+hr {
+  border: 1px solid black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 textarea {
   width: 80%;
   border: none;
