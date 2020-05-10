@@ -10,8 +10,24 @@ import { PrintItem } from './print-item';
 })
 export class PrintItemButtonDirective implements OnInit {
 
+  /**
+   * Id of print item to be printed
+   */
   @Input()
   printItemId = '';
+
+  /**
+   * html id of div to be printed
+   */
+  @Input()
+  divID = '';
+
+  /**
+   * print item by class name
+   */
+  @Input()
+  className = '';
+
 
   constructor(
     private el: ElementRef,
@@ -19,16 +35,35 @@ export class PrintItemButtonDirective implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.el.nativeElement && this.printItemId !== '') {
+    if (this.el.nativeElement && this.checkInputs()) {
         this.el.nativeElement.addEventListener('click', () => {
-        const itemToPrint = this.printerService.getPrintItem(
-          this.printItemId
-        );
-
-        if (itemToPrint) {
-          this.printerService.printPrintItem(itemToPrint);
+        if (this.printItemId !== '') {
+          this.prinPrintItem();
+        }
+        if (this.divID !== '') {
+          this.printerService.printDiv(this.divID);
+        }
+        if (this.className !== '') {
+          this.printerService.printByClassName(this.className);
         }
       });
+    }
+  }
+
+  /**
+   * Check if at least one property is set
+   */
+  private checkInputs() {
+    return !(this.printItemId === '' && this.divID === '' && this.className === '');
+  }
+
+  /**
+   * print item from print items 
+   */
+  private prinPrintItem() {
+    const itemToPrint = this.printerService.getPrintItem(this.printItemId);
+    if (itemToPrint) {
+      this.printerService.printPrintItem(itemToPrint);
     }
   }
 }

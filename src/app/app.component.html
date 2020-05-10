@@ -79,7 +79,7 @@
   >A <b>first</b> span with an ngxPrintItem directive</span
 >
 <br />
-<span id="secondPrintItem" ngxPrintItem printName="Second one"
+<span id="secondPrintItem" class="printident" ngxPrintItem printName="Second one"
   >A <b>second</b> span with an ngxPrintItem directive</span
 >
 <br />
@@ -93,7 +93,7 @@
   </button>
 </div>
 <textarea disabled="true" rows="2">
-  <span id="secondPrintItem" ngxPrintItem printName="Second one"
+  <span id="secondPrintItem"  ngxPrintItem printName="Second one"
   >A <b>second</b> span with an ngxPrintItem directive</span>
 </textarea>
 <br />
@@ -105,13 +105,21 @@
   Print first print item from list directly with ngxPrintItemButton printItemId
   directive
 </h4>
-<textarea disabled="true" rows="1">
-  <button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
-</textarea>
-<br />
 <button ngxPrintItemButton printItemId="firstPrintItem">
-  Print first item directly
+  Print first print item directly
 </button>
+<button ngxPrintItemButton className="printident">
+  Print item by className with this button
+</button>
+<button ngxPrintItemButton divID="printDiv">
+  Print div by id with this button
+</button>
+<br />
+<textarea disabled="true" rows="3">
+  <button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
+  <button ngxPrintItemButton className="printident"> Print item by className with this button</button>
+  <button ngxPrintItemButton divID="printDiv">Print div by id with this button </button>
+</textarea>
 
 <br />
 <br />
