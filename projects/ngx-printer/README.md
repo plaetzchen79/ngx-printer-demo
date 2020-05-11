@@ -1,8 +1,8 @@
-A easy to use service to print the window, parts of a window (div) or an image.
+A easy to use service to print a window, parts of a window (divs) or an image.
 Printing of Angular Templates or Components is possible.
 You can print opening a new window / tab or using the current window.
 A directive can also be used to mark and store an HTML-element.
-Several usefull directives can further assist you.
+Several other usefull directives can further assist you.
 
 See the DEMO App and [DEMO-Page](https://plaetzchen79.github.io/) for examples.
 
@@ -167,7 +167,7 @@ You can also only override the image using the property `backgroundImage`. You c
 speficy the data for the *background-url*.
 
 ### Event 
-You can listen to the event 'printClicked'.
+You can listen to the event `printClicked`.
 
 HTML:
 ```html
