@@ -126,6 +126,7 @@ You can use
 - a class name (className="ABC") of an HTML element
 - an id of an HTML element (divID = "") of an HTML element
 - an property to print the whole window (printWindow="true")
+
 The Click-Event to print the item will be automatically set.
 
 HTML:
