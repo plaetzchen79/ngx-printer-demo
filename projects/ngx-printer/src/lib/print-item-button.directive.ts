@@ -28,6 +28,12 @@ export class PrintItemButtonDirective implements OnInit {
   @Input()
   className = '';
 
+  /**
+   * print current window
+   */
+  @Input()
+  printWindow = 'false';
+
 
   constructor(
     private el: ElementRef,
@@ -46,6 +52,9 @@ export class PrintItemButtonDirective implements OnInit {
         if (this.className !== '') {
           this.printerService.printByClassName(this.className);
         }
+        if (this.printWindow !== 'false') {
+          this.printerService.printCurrentWindow();
+        }
       });
     }
   }
@@ -54,11 +63,12 @@ export class PrintItemButtonDirective implements OnInit {
    * Check if at least one property is set
    */
   private checkInputs() {
-    return !(this.printItemId === '' && this.divID === '' && this.className === '');
+    const check = !(this.printWindow === 'false' && this.printItemId === '' && this.divID === '' && this.className === '');
+    return check;
   }
 
   /**
-   * print item from print items 
+   * print item from print items
    */
   private prinPrintItem() {
     const itemToPrint = this.printerService.getPrintItem(this.printItemId);

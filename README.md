@@ -124,11 +124,24 @@ TS:
 ```
 
 ## Directive ngxPrintItemButton
-If you want to print a single item from the list of ngxPrintItems (see above) without ts you can use the diretive ngxPrintItemButton. You have to know the id of the printItem.
+If you want to print a single item from the list of ngxPrintItems (see above) or other HTML-elements without ts you can use the diretive ngxPrintItemButton. 
+You can use
+- an id of the printItem from the list
+- a class name (className="ABC") of an HTML element
+- an id of an HTML element (divID = "") of an HTML element
+- an property to print the whole window (printWindow="true")
 The Click-Event to print the item will be automatically set.
 
+HTML:
 ```html
 <button ngxPrintItemButton printItemId="firstPrintItem">Print first item directly</button>
+<button ngxPrintItemButton className="printident">
+  Print item by className with this button
+</button>
+<button ngxPrintItemButton divID="printDiv">
+  Print div by id with this button
+</button>
+<button ngxPrintItemButton printWindow="true"> Print whole window with this button </button>
 ```
 
 ## Directive ngxPrintItemMarker
@@ -170,10 +183,6 @@ HTML:
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
