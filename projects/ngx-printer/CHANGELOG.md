@@ -1,3 +1,6 @@
+# 0.6.0
+- lots of new properties for diectvie 'ngxPrintItemButton'
+
 # 0.5.3
 - extends config with property 'markerPosition' and the proper enum 'ngxPrintMarkerPosition'
 - public demo page
@@ -12,8 +15,8 @@
 
 # 0.5.0
 - new directives to make life easier:
-    - added new directive NgxPrinterButton
-    - added new directive NgxPrinterMarker
+    - added new directive ngxPrintItemButton
+    - added new directive ngxPrintItemMarker
 - updated to Angular 9.1
 
 # 0.4.0
