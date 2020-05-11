@@ -1,3 +1,6 @@
+# 0.6.1
+- npm package changes
+
 # 0.6.0
 - lots of new properties for diectvie 'ngxPrintItemButton'
 
