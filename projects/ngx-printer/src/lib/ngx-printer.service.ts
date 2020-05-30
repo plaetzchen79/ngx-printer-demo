@@ -54,6 +54,12 @@ export class NgxPrinterService {
    */
   appRootName = 'app-root';
 
+  /**
+   * Do not fire print event - just show preview
+   * Default is false
+   */
+  printPreviewOnly = false;
+
   appRoot: HTMLElement;
   appRootDislaySetting = '';
 
@@ -90,6 +96,9 @@ export class NgxPrinterService {
       }
       if (config.markerPosition) {
         this.markerPosition = config.markerPosition;
+      }
+      if (config.printPreviewOnly) {
+        this.printPreviewOnly = config.printPreviewOnly;
       }
     }
   }
@@ -238,6 +247,9 @@ export class NgxPrinterService {
    * Print window in new tab
    */
   private printTabWindow(printWindow: Window, printWindowDoc: Document): void {
+    if (this.printPreviewOnly) {
+      return;
+    }
     this.registerPrintEvent(printWindow, true);
     this.printWindowOpen.next(true);
     printWindow.focus(); // necessary for IE >= 10*/
@@ -250,6 +262,9 @@ export class NgxPrinterService {
    * Print the whole current window
    */
   public printCurrentWindow(): void {
+    if (this.printPreviewOnly) {
+      return;
+    }
     this.registerPrintEvent(window, false);
     setTimeout(() => {
       this.printWindowOpen.next(true);

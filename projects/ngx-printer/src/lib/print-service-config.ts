@@ -17,4 +17,7 @@ export class PrintServiceConfig {
 
   /* Default postion for image used in directive printerMarker */
   markerPosition ? = ngxPrintMarkerPosition.Topleft;
+
+  /* Just show preview without fireing the print command - default is false */
+  printPreviewOnly ? = false;
 }

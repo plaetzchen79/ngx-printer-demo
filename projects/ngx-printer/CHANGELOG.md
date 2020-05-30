@@ -1,3 +1,6 @@
+# 0.6.2
+- new property 'printPreviewOnly' for the main service
+
 # 0.6.1
 - npm package changes
 

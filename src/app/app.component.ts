@@ -32,6 +32,10 @@ export class AppComponent {
     this.$printItems = this.printerService.$printItems;
   }
 
+  checkChanged() {
+    this.printerService.printPreviewOnly = !this.printerService.printPreviewOnly;
+  }
+
   printDiv() {
     this.printerService.printDiv('printDiv');
   }
