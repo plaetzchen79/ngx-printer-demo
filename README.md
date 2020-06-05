@@ -107,9 +107,11 @@ this.printWindowSubscription = this.printerService.$printWindowOpen.subscribe(va
  later and anyhwere on the page.
  An id has to be set.
  These items are stored in the services observable *printerService.$printItems*.
- Use the async pipe to subscribe and the function `printPrintItem`  to print the item.
 
-HTML:
+ ### function 'printPrintItem'
+ Use the async pipe to subscribe and then call the function `printPrintItem`  to print **one** item.
+
+ HTML:
 ```html
 <span id="firstPrintItem" ngxPrintItem printName="First one" >A <b>first</b> span with an ngxPrintItem directive</span>
 
@@ -124,6 +126,20 @@ TS:
     this.printerService.printPrintItem(itemToPrint);
   }
 });
+```
+
+### function 'printPrintItems'
+You can also use the function `printPrintItems(itemsToPrint, ?customCssClass)` to print more than one item.
+The items will be printed beneath each other (simple flex css). To arrange them side by side you can set your custom
+class as a second parameter.
+
+TS:
+```javascript
+  this.$printItems.subscribe(items => {
+      itemsToPrint = items as PrintItem[];
+    });
+
+    this.printerService.printPrintItems(itemsToPrint);
 ```
 
 ## Directive ngxPrintItemButton

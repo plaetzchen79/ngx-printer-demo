@@ -1,21 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
 .current-window {
-    background-color: white;
-    height: 100%;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: 50px;
-    z-index: 1000000;
-  }
-  
-  .mymarker {
-    background-color: black;
-    width: 32px;
-    height: 32px;
-    position: absolute;
-    top: 1px;
-    left: 100px;
-  }
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 50px;
+  z-index: 1000000;
+}
+
+.mymarker {
+  background-color: black;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 1px;
+  left: 100px;
+}
+
+.flex-side {
+  display: flex;
+  justify-content: space-between;
+}

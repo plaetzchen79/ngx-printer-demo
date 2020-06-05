@@ -1,3 +1,8 @@
+# 0.7.0
+- new function 'printPrintItems' to print
+more than one print item one beneatch each other
+- copy existing css when printing to new tab/page
+
 # 0.6.2
 - new property 'printPreviewOnly' for the main service
 

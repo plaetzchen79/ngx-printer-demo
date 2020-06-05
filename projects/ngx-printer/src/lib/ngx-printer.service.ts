@@ -233,6 +233,7 @@ export class NgxPrinterService {
     // printWindow.document.write(document.documentElement.innerHTML);
 
     const printWindowDoc = printWindow.document;
+    this.copyCss(printWindowDoc);
     printWindowDoc.body.style.margin = '0 0';
     printWindowDoc.body.appendChild(divToPrint);
     printWindow.document.close();
@@ -241,6 +242,25 @@ export class NgxPrinterService {
       () => this.printTabWindow(printWindow, printWindowDoc),
       this.timeToWaitRender
     );
+  }
+
+  /**
+   * Copy Css links to new page
+   * @param printWindow 
+   */
+  private copyCss(printWindowDoc: Document) {
+
+    const links = document.querySelectorAll('link');
+    const styles = document.querySelectorAll('style');
+    const targetHead = printWindowDoc.getElementsByTagName('head')[0];
+
+    links.forEach(link => {
+      targetHead.appendChild(link.cloneNode(true));
+    });
+
+    styles.forEach(style => {
+      targetHead.appendChild(style.cloneNode(true));
+    });
   }
 
   /**
@@ -414,5 +434,27 @@ export class NgxPrinterService {
    */
   public printPrintItem(printItemToPrint: PrintItem): void {
     this.printHTMLElement(printItemToPrint.nativeElement);
+  }
+
+  /**
+   * Print al list of print Items one after the other
+   * @param printItemToPrint
+   */
+  public printPrintItems(printItemsToPrint: PrintItem[], className?: string): void {
+    const newDiv = <HTMLDivElement>document.createElement('div');
+
+    if (className) {
+      newDiv.classList.add(className);
+    } else {
+      newDiv.style.display = 'flex';
+      newDiv.style.flexDirection = 'column';
+    }
+
+    printItemsToPrint.forEach(element => {
+      newDiv.appendChild(element.nativeElement.cloneNode(true));
+    });
+
+
+    this.printHTMLElement(newDiv);
   }
 }

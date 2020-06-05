@@ -70,13 +70,34 @@ export class AppComponent {
     this.printerService.printImg('assets/bratwurst.jpg');
   }
 
-
   printComponent() {
     this.printerService.printDiv('printDiv');
   }
 
   printItem(itemToPrint: PrintItem) {
     this.printerService.printPrintItem(itemToPrint);
+  }
+
+  printItems() {
+    let itemsToPrint: PrintItem[];
+
+    this.$printItems.subscribe(items => {
+      itemsToPrint = items as PrintItem[];
+    });
+
+    this.printerService.printPrintItems(itemsToPrint);
+  }
+
+  printItemsWithClass() {
+    let itemsToPrint: PrintItem[];
+
+    this.$printItems.subscribe(items => {
+      itemsToPrint = items as PrintItem[];
+    });
+
+    this.printerService.printOpenWindow = true;
+    this.printerService.printPrintItems(itemsToPrint, 'flex-side');
+    // this.printerService.printOpenWindow = true;
   }
 
   printItemCurrent(itemToPrint: PrintItem) {

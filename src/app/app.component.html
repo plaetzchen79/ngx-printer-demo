@@ -82,7 +82,7 @@
 <br />
 <hr>
 <h2 id="pitems" class="anchor">-- List / Subject of printable items - Directive 'ngxPrintItem' --</h2>
-
+<br />
 <span id="firstPrintItem" ngxPrintItem printName="First one"
   >A <b>first</b> span with an ngxPrintItem directive</span
 >
@@ -92,6 +92,10 @@
 >
 <br />
 <br />
+<button (click)="printItems()">Print both items below each other!</button>
+<button (click)="printItemsWithClass()">Print both items side by side with own class to new window</button>
+<br />
+<br />
 <div *ngFor="let prinItem of $printItems | async">
   <span>{{ prinItem.id }} - {{ prinItem.printName }}</span>
   <br />
@@ -99,10 +103,18 @@
   <button (click)="printItemCurrent(prinItem)">
     Print me to current window!
   </button>
+  <br />
 </div>
+
 <textarea disabled="true" rows="2">
   <span id="secondPrintItem"  ngxPrintItem printName="Second one"
   >A <b>second</b> span with an ngxPrintItem directive</span>
+</textarea>
+<textarea disabled="true" rows="4">
+  this.$printItems.subscribe(items => {
+    itemsToPrint = items as PrintItem[];
+  });
+  this.printerService.printPrintItems(itemsToPrint);
 </textarea>
 <br />
 <br />
