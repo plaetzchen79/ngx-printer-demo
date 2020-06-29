@@ -1,3 +1,6 @@
+# 0.8.0
+- updated to Angular 10
+
 # 0.7.0
 - new function 'printPrintItems' to print
 more than one print item one beneatch each other

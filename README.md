@@ -58,7 +58,7 @@ The maker image is placed to the bottom left. You can change this by changing th
 property *markerPosition*. Use a value of the enum  *ngxPrintMarkerPosition* (TopLeft, .TopRight, .BottomLeft, .BottomRight).
 
 ### Print preview - not fire print event
-If want to display a preview without fireing the print event you can use *printPreviewOnly = true*. This can also be usefull for debugging purposes.
+If you want to display a preview without fireing the print event you can use *printPreviewOnly = true*. This can also be usefull for debugging purposes.
 
 ## Functions - How to print 
 ### Print current window

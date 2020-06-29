@@ -15,11 +15,18 @@ describe('NgxPrinterService', () => {
 
   createTestDivs();
 
-  it('NgxPrinterService should be created', () => {
-    service = TestBed.get(NgxPrinterService);
+  beforeEach(() => {
+    service = TestBed.inject(NgxPrinterService);
     service.timeToWaitRender = serviceConfig.timeToWaitRender;
     expect(service).toBeTruthy();
   });
+  
+  it('NgxPrinterService should be created', () => {
+    service = TestBed.inject(NgxPrinterService);
+    service.timeToWaitRender = serviceConfig.timeToWaitRender;
+    expect(service).toBeTruthy();
+  });
+
 
   it('should add print item', done => {
     const printItem = new PrintItem();
