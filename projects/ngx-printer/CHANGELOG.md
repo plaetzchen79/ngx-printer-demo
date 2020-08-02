@@ -1,3 +1,8 @@
++ 0.8.1
+- fix #14
+- optional context parameter for 'printAngular'
+- security updates
+
 # 0.8.0
 - updated to Angular 10
 

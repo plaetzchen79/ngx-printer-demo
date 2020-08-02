@@ -138,8 +138,8 @@ export class NgxPrinterService {
    * @example
    * this.printerService.printAngular(this.PrintTemplateTpl);
    */
-  public printAngular(contentToPrint: any): void {
-    const nativeEl = this.createComponent(contentToPrint);
+  public printAngular(contentToPrint: any, context?: any): void {
+    const nativeEl = this.createComponent(contentToPrint, null, context);
 
     this.print(nativeEl.nativeElement, this.printOpenWindow);
   }
@@ -174,13 +174,16 @@ export class NgxPrinterService {
    * Create and render component
    * @param contentToRender
    */
-  private createComponent(contentToRender: any, imgSrc?: string): any {
+  private createComponent(contentToRender: any, imgSrc?: string, context?: any): any {
     // this.viewContainerRef.clear();
     const factory = this.resolver.resolveComponentFactory(NgxPrinterComponent);
     let componentRef: any;
 
     if (contentToRender) {
-      const ngContent = this.resolveNgContent(contentToRender);
+      if (context === undefined) {
+        context = null;
+      }
+      const ngContent = this.resolveNgContent(contentToRender, context);
       componentRef = factory.create(this.injector, ngContent); // this.viewContainerRef.createComponent(factory);
     } else {
       componentRef = factory.create(this.injector);
@@ -354,14 +357,15 @@ export class NgxPrinterService {
    * @param content
    * @internal
    */
-  private resolveNgContent<T>(content: Content<T>): any {
+  private resolveNgContent<T>(content: Content<T>, context: any): any {
     if (typeof content === 'string') {
       const element = document.createTextNode(content);
       return [[element]];
     }
 
     if (content instanceof TemplateRef) {
-      const viewRef = content.createEmbeddedView(null);
+      const viewRef = content.createEmbeddedView(context);
+      viewRef.detectChanges();
       return [viewRef.rootNodes];
     }
 

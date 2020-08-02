@@ -79,6 +79,7 @@ printTemplate() {
 Beware: To print a component the component needs to be known by service (copy source and add it to entry
 component of app.module).
 Otherwise use printHTMLElement instead.
+You can pass an optional context as the second parameter.
 
 ### Print HTML Element
 ```javascript

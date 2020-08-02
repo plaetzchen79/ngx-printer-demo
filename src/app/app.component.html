@@ -24,12 +24,14 @@
 
 <br />
 <little-dummy></little-dummy>
-
 <br />
-<ng-template #PrintTemplate>
-  Template
+<br />
+<ng-container #PrintTemplateContainer *ngTemplateOutlet="PrintTemplate; context:title"></ng-container>
+<br />
+<ng-template #PrintTemplate let-name="title">
+  <span>Little dummy Template</span>
   <h1>
-    Test template to print
+    Test template to print {{title}}
   </h1>
   <span>Some text</span>
 </ng-template>
