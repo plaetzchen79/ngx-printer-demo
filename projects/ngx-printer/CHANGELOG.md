@@ -1,4 +1,4 @@
-+ 0.8.1
+# 0.8.1
 - fix #14
 - optional context parameter for 'printAngular'
 - security updates

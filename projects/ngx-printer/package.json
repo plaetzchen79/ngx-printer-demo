@@ -1,6 +1,6 @@
 {
   "name": "ngx-printer",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "peerDependencies": {
     "@angular/common": "^10.0.0",
     "@angular/core": "^10.0.0"
@@ -28,7 +28,8 @@
   "bugs": {
     "url": "https://github.com/plaetzchen79/ngx-printer-demo/issues"
   },
-  "homepage": "https://plaetzchen79.github.io/",
+  "homepage": "https://plaetzchen79.github.io/"
+,
   "dependencies": {
     "tslib": "^2.0.0"
   }
