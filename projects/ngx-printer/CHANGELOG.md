@@ -1,3 +1,7 @@
+
+# 0.8.2
+- optimizations for #15 / #18
+
 # 0.8.1
 - fix #14
 - optional context parameter for 'printAngular'
