@@ -114,7 +114,7 @@ export class NgxPrinterService {
     if (divToPrint) {
       this.print(divToPrint, this.printOpenWindow);
     } else {
-      console.log('div with id ${divID} not found..');
+      console.log(`div with id ${divID} not found..`);
     }
   }
 
@@ -204,11 +204,11 @@ export class NgxPrinterService {
    */
   private print(printContent: any, printOpenWindow: boolean): void {
     if (printOpenWindow === true) {
-      const printContentClone = printContent.cloneNode(true);
+      const printContentClone = document.importNode(printContent, true); // printContent.cloneNode(true);
       this.printInNewWindow(printContentClone);
     }
     if (printOpenWindow === false) {
-      const printContentClone = printContent.cloneNode(true);
+      const printContentClone = document.importNode(printContent, true); // printContent.cloneNode(true);
       const nativeEl = this.createComponent(printContentClone).nativeElement;
       this.openNgxPrinter = nativeEl;
       document.body.appendChild(this.openNgxPrinter);
@@ -258,11 +258,11 @@ export class NgxPrinterService {
     const targetHead = printWindowDoc.getElementsByTagName('head')[0];
 
     links.forEach(link => {
-      targetHead.appendChild(link.cloneNode(true));
+      targetHead.appendChild(document.importNode(link, true));
     });
 
     styles.forEach(style => {
-      targetHead.appendChild(style.cloneNode(true));
+      targetHead.appendChild(document.importNode(style, true));
     });
   }
 

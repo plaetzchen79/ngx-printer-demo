@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'little-dummy',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./little-dummy.component.css']
 })
 export class LittleDummyComponent implements OnInit {
+
+  @Input() helloText = '';
 
   constructor() { }
 
