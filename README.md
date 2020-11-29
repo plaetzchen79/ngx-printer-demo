@@ -10,8 +10,6 @@ Several usefull directives can further assist you.
 
 See the DEMO App and [DEMO-Page](https://plaetzchen79.github.io/) for examples.
 
-Starting with Version 0.9 (Anguar 11) *Ivy* will be the default renderer.
-
 # Usage
 1. Add to main *app.module* imports
 2. Use the *NgxPrinterService* where you like via DI (private printerService: NgxPrinterService)

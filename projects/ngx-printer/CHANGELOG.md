@@ -1,6 +1,5 @@
 # 0.9.0
 - updated to Angular 11
-- made Ivy default
 
 # 0.8.2
 - optimizations for #15 / #18
