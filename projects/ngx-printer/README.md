@@ -183,6 +183,8 @@ HTML:
 ```html
 <div ngxPrintItemMarker directPrint="true"></div>
 ```
+## Directive ngxNoPrint
+Use this directive to prevent an sub-item (child) to be printed.
 
 ### Customization
 You can override the default class with the `customClass` property.

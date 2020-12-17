@@ -205,10 +205,12 @@ export class NgxPrinterService {
   private print(printContent: any, printOpenWindow: boolean): void {
     if (printOpenWindow === true) {
       const printContentClone = document.importNode(printContent, true); // printContent.cloneNode(true);
+      this.hideBeforePrint(printContentClone);
       this.printInNewWindow(printContentClone);
     }
     if (printOpenWindow === false) {
       const printContentClone = document.importNode(printContent, true); // printContent.cloneNode(true);
+      this.hideBeforePrint(printContentClone);
       const nativeEl = this.createComponent(printContentClone).nativeElement;
       this.openNgxPrinter = nativeEl;
       document.body.appendChild(this.openNgxPrinter);
@@ -379,6 +381,20 @@ export class NgxPrinterService {
     const componentRef = factory.create(this.injector);
     componentRef.changeDetectorRef.detectChanges();
     return [[componentRef.location.nativeElement]];
+  }
+
+  /**
+   * Hide an element before printing
+   * @param parentDiv 
+   */
+  private hideBeforePrint(parentDiv: HTMLElement): void {
+
+    const childrenOfDiv = parentDiv.querySelectorAll('.no_print_indicator');
+
+    for (let i = 0; i < childrenOfDiv.length; i++) {
+      const child = childrenOfDiv[i] as HTMLElement;
+      child.style.display = 'none';
+     }
   }
 
   /**

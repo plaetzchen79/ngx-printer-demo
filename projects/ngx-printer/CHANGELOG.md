@@ -1,3 +1,6 @@
+# 0.9.1
+- fixes #21, #22
+
 # 0.9.0
 - updated to Angular 11
 
