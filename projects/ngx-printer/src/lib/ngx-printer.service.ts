@@ -251,13 +251,19 @@ export class NgxPrinterService {
 
   /**
    * Copy Css links to new page
-   * @param printWindow 
+   * @param printWindow
    */
   private copyCss(printWindowDoc: Document) {
 
     const links = document.querySelectorAll('link');
     const styles = document.querySelectorAll('style');
+    const base = document.querySelector('base');
+
     const targetHead = printWindowDoc.getElementsByTagName('head')[0];
+
+    if (base) {
+      targetHead.appendChild(document.importNode(base, true));
+    }
 
     links.forEach(link => {
       targetHead.appendChild(document.importNode(link, true));
@@ -340,7 +346,7 @@ export class NgxPrinterService {
         if (document.body.getElementsByTagName('ngx-printer').length === 0) {
           return;
         }
-       
+
         if (this.appRoot) {
           if (this.appRootDislaySetting !== '') {
             this.appRoot.style.display = this.appRootDislaySetting;
