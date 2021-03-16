@@ -82,7 +82,7 @@ export class NgxPrinterService {
    */
   private setRootConfigOptions(config: PrintServiceConfig): void {
     if (config) {
-      if (config.printOpenWindow) {
+      if (config.hasOwnProperty('printOpenWindow')) {
         this.printOpenWindow = config.printOpenWindow;
       }
       if (config.timeToWaitRender) {
@@ -97,7 +97,7 @@ export class NgxPrinterService {
       if (config.markerPosition) {
         this.markerPosition = config.markerPosition;
       }
-      if (config.printPreviewOnly) {
+      if (config.hasOwnProperty('printPreviewOnly')) {
         this.printPreviewOnly = config.printPreviewOnly;
       }
     }
