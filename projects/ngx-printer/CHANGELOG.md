@@ -1,6 +1,9 @@
+# 1.1.0
+- updated to Angular 12
 
 # 1.0.0
 - updated to Angular 12
+
 # 0.9.2
 - fixes #25
 - security issues
