@@ -1,5 +1,6 @@
 # 1.1.0
-- updated to Angular 12
+- updated to Angular 13
+- security issues
 
 # 1.0.0
 - updated to Angular 12
