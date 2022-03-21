@@ -1,16 +1,17 @@
-import { ngxPrintMarkerPosition } from './ngx-print-marker-position.enum';
-import { PrintItem } from './print-item';
+import { Helpers } from "./helper";
+import { ngxPrintMarkerPosition } from "./ngx-print-marker-position.enum";
+import { PrintItem } from "./print-item";
 import {
-  Injectable,
-  TemplateRef,
   ComponentFactoryResolver,
+  Injectable,
   Injector,
   Optional,
-  Type
-} from '@angular/core';
-import { NgxPrinterComponent } from './ngx-printer.component';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { PrintServiceConfig } from './print-service-config';
+  TemplateRef,
+  Type,
+} from "@angular/core";
+import { NgxPrinterComponent } from "./ngx-printer.component";
+import { BehaviorSubject } from "rxjs";
+import { PrintServiceConfig } from "./print-service-config";
 
 export type Content<T> = string | HTMLElement | TemplateRef<T> | Type<T>;
 
@@ -18,7 +19,7 @@ export type Content<T> = string | HTMLElement | TemplateRef<T> | Type<T>;
  * Main print service
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class NgxPrinterService {
   private printWindowOpen = new BehaviorSubject<boolean>(false);
@@ -40,7 +41,7 @@ export class NgxPrinterService {
   /**
    * Class used in component when printing to current window
    */
-  renderClass = 'default';
+  renderClass = "default";
 
   /**
    * Open new window to print or not
@@ -52,7 +53,7 @@ export class NgxPrinterService {
    * Name of root component
    * Default is app-root
    */
-  appRootName = 'app-root';
+  appRootName = "app-root";
 
   /**
    * Do not fire print event - just show preview
@@ -61,12 +62,11 @@ export class NgxPrinterService {
   printPreviewOnly = false;
 
   appRoot: HTMLElement;
-  appRootDislaySetting = '';
+  appRootDislaySetting = "";
 
   $printWindowOpen = this.printWindowOpen.asObservable();
   eventadded = [];
   markerPosition: ngxPrintMarkerPosition;
-
 
   constructor(
     @Optional() config: PrintServiceConfig,
@@ -82,23 +82,21 @@ export class NgxPrinterService {
    */
   private setRootConfigOptions(config: PrintServiceConfig): void {
     if (config) {
-      if (config.hasOwnProperty('printOpenWindow')) {
-        this.printOpenWindow = config.printOpenWindow;
-      }
-      if (config.timeToWaitRender) {
-        this.timeToWaitRender = config.timeToWaitRender;
-      }
-      if (config.renderClass) {
-        this.renderClass = config.renderClass;
-      }
-      if (config.appRootName) {
-        this.appRootName = config.appRootName;
-      }
-      if (config.markerPosition) {
-        this.markerPosition = config.markerPosition;
-      }
-      if (config.hasOwnProperty('printPreviewOnly')) {
+      config.timeToWaitRender &&
+        (this.timeToWaitRender = config.timeToWaitRender);
+
+      config.renderClass && (this.renderClass = config.renderClass);
+
+      config.appRootName && (this.appRootName = config.appRootName);
+
+      config.markerPosition && (this.markerPosition = config.markerPosition);
+
+      if (config.hasOwnProperty("printPreviewOnly")) {
         this.printPreviewOnly = config.printPreviewOnly;
+      }
+
+      if (config.hasOwnProperty("printOpenWindow")) {
+        this.printOpenWindow = config.printOpenWindow;
       }
     }
   }
@@ -128,7 +126,7 @@ export class NgxPrinterService {
     if (elementToPrint && elementToPrint.length > 0) {
       this.print(<HTMLScriptElement>elementToPrint[0], this.printOpenWindow);
     } else {
-      console.log('element with id ${className} not found..');
+      console.log("element with id ${className} not found..");
     }
   }
 
@@ -153,9 +151,9 @@ export class NgxPrinterService {
     const compRef = this.createComponent(null, imgSrc);
     const openNewWindow = this.printOpenWindow;
 
-    compRef.instance.completed.subscribe(val => {
+    compRef.instance.completed.subscribe((val) => {
       compRef.hostView.detectChanges();
-      console.log('completed:', val);
+      console.log("completed:", val);
       this.print(compRef.location.nativeElement, openNewWindow);
     });
   }
@@ -174,7 +172,11 @@ export class NgxPrinterService {
    * Create and render component
    * @param contentToRender
    */
-  private createComponent(contentToRender: any, imgSrc?: string, context?: any): any {
+  private createComponent(
+    contentToRender: any,
+    imgSrc?: string,
+    context?: any
+  ): any {
     // this.viewContainerRef.clear();
     const factory = this.resolver.resolveComponentFactory(NgxPrinterComponent);
     let componentRef: any;
@@ -214,11 +216,10 @@ export class NgxPrinterService {
       const nativeEl = this.createComponent(printContentClone).nativeElement;
       this.openNgxPrinter = nativeEl;
       document.body.appendChild(this.openNgxPrinter);
-      // window.scrollTo(0, 0);
+
       this.getAppRoot();
-      if (this.appRoot) {
-        this.appRoot.style.display = 'none';
-      }
+
+      this.appRoot && (this.appRoot.style.display = "none");
 
       this.printCurrentWindow();
     }
@@ -229,49 +230,25 @@ export class NgxPrinterService {
    * @param divToPrint
    */
   private printInNewWindow(divToPrint: HTMLElement): void {
-    const printWindow = window.open('', 'PRINT');
+    const printWindow = window.open("", "PRINT");
     const title = document.title;
 
     printWindow.document.write(
-      '<HTML><HEAD><TITLE>' + title + '</TITLE></HEAD><BODY></BODY></HTML>'
+      "<HTML><HEAD><TITLE>" + title + "</TITLE></HEAD><BODY></BODY></HTML>"
     );
     // printWindow.document.write(document.documentElement.innerHTML);
 
     const printWindowDoc = printWindow.document;
-    this.copyCss(printWindowDoc);
-    printWindowDoc.body.style.margin = '0 0';
+    Helpers.copyCss(printWindowDoc);
+
+    printWindowDoc.body.style.margin = "0 0";
     printWindowDoc.body.appendChild(divToPrint);
     printWindow.document.close();
-    // printWindowDoc.body.innerHTML = divToPrint.outerHTML;
+
     setTimeout(
       () => this.printTabWindow(printWindow, printWindowDoc),
       this.timeToWaitRender
     );
-  }
-
-  /**
-   * Copy Css links to new page
-   * @param printWindow
-   */
-  private copyCss(printWindowDoc: Document) {
-
-    const links = document.querySelectorAll('link');
-    const styles = document.querySelectorAll('style');
-    const base = document.querySelector('base');
-
-    const targetHead = printWindowDoc.getElementsByTagName('head')[0];
-
-    if (base) {
-      targetHead.appendChild(document.importNode(base, true));
-    }
-
-    links.forEach(link => {
-      targetHead.appendChild(document.importNode(link, true));
-    });
-
-    styles.forEach(style => {
-      targetHead.appendChild(document.importNode(style, true));
-    });
   }
 
   /**
@@ -284,7 +261,7 @@ export class NgxPrinterService {
     this.registerPrintEvent(printWindow, true);
     this.printWindowOpen.next(true);
     printWindow.focus(); // necessary for IE >= 10*/
-    if (printWindowDoc.execCommand('print') === false) {
+    if (printWindowDoc.execCommand("print") === false) {
       printWindow.print();
     }
   }
@@ -299,7 +276,7 @@ export class NgxPrinterService {
     this.registerPrintEvent(window, false);
     setTimeout(() => {
       this.printWindowOpen.next(true);
-      if (document.execCommand('print') === false) {
+      if (document.execCommand("print") === false) {
         window.print();
       }
     }, this.timeToWaitRender);
@@ -309,14 +286,17 @@ export class NgxPrinterService {
    * Listen to print event of window
    * @param printWindow
    */
-  private registerPrintEvent(printWindow: Window, printWithOpenInNewWindow: boolean) {
+  private registerPrintEvent(
+    printWindow: Window,
+    printWithOpenInNewWindow: boolean
+  ) {
     const that = this;
     printWindow.focus(); // necessary for IE >= 10*/
 
     if (that.eventadded[printWindow.name]) {
       return;
     }
-    printWindow.addEventListener('afterprint', () => {
+    printWindow.addEventListener("afterprint", () => {
       this.eventadded[printWindow.name] = true;
       // console.log('afterprint');
       if (printWithOpenInNewWindow) {
@@ -333,74 +313,44 @@ export class NgxPrinterService {
    */
   private cleanUp(printWindow: Window, printOpenWindow: boolean): void {
     if (printOpenWindow === true) {
-      console.log('close print window');
+      console.log("close print window");
       printWindow.close();
       setTimeout(() => {
         printWindow.close();
       }, 20);
     }
     if (printOpenWindow === false) {
-        if (!this.openNgxPrinter) {
-          return;
+      if (!this.openNgxPrinter) {
+        return;
+      }
+      if (document.body.getElementsByTagName("ngx-printer").length === 0) {
+        return;
+      }
+
+      if (this.appRoot) {
+        if (this.appRootDislaySetting !== "") {
+          this.appRoot.style.display = this.appRootDislaySetting;
+        } else {
+          this.appRoot.style.display = "";
         }
-        if (document.body.getElementsByTagName('ngx-printer').length === 0) {
-          return;
-        }
+      }
 
-        if (this.appRoot) {
-          if (this.appRootDislaySetting !== '') {
-            this.appRoot.style.display = this.appRootDislaySetting;
-          } else {
-            this.appRoot.style.display = '';
-          }
-        }
-
-        document.body.removeChild(this.openNgxPrinter);
-        this.openNgxPrinter = null;
+      document.body.removeChild(this.openNgxPrinter);
+      this.openNgxPrinter = null;
     }
-  }
-
-  /**
-   * Create node or angular component
-   * @param content
-   * @internal
-   */
-  private resolveNgContent<T>(content: Content<T>, context: any): any {
-    if (typeof content === 'string') {
-      const element = document.createTextNode(content);
-      return [[element]];
-    }
-
-    if (content instanceof TemplateRef) {
-      const viewRef = content.createEmbeddedView(context);
-      viewRef.detectChanges();
-      return [viewRef.rootNodes];
-    }
-
-    if (content instanceof HTMLElement) {
-      return [[content]];
-    }
-
-    /** Otherwise it's a component */
-    const factory = this.resolver.resolveComponentFactory(content);
-
-    const componentRef = factory.create(this.injector);
-    componentRef.changeDetectorRef.detectChanges();
-    return [[componentRef.location.nativeElement]];
   }
 
   /**
    * Hide an element before printing
-   * @param parentDiv 
+   * @param parentDiv
    */
   private hideBeforePrint(parentDiv: HTMLElement): void {
-
-    const childrenOfDiv = parentDiv.querySelectorAll('.no_print_indicator');
+    const childrenOfDiv = parentDiv.querySelectorAll(".no_print_indicator");
 
     for (let i = 0; i < childrenOfDiv.length; i++) {
       const child = childrenOfDiv[i] as HTMLElement;
-      child.style.display = 'none';
-     }
+      child.style.display = "none";
+    }
   }
 
   /**
@@ -412,7 +362,7 @@ export class NgxPrinterService {
     if (appRoot.length === 0) {
       return null;
     } else {
-      this.appRoot = <HTMLElement> appRoot[0];
+      this.appRoot = <HTMLElement>appRoot[0];
       this.appRootDislaySetting = this.appRoot.style.display;
     }
   }
@@ -437,11 +387,11 @@ export class NgxPrinterService {
    */
   public removePrintItem(idOfItemToRemove: string): void {
     const tmpItems = this._printItems.getValue();
-    const newIitems = tmpItems.filter(item => item.id !== idOfItemToRemove);
+    const newIitems = tmpItems.filter((item) => item.id !== idOfItemToRemove);
     this._printItems.next(newIitems);
   }
 
-    /**
+  /**
    * Gets a single print item from service
    * Used by directive
    * @internal
@@ -449,10 +399,9 @@ export class NgxPrinterService {
    */
   public getPrintItem(idOfItemToRemove: string): PrintItem {
     const tmpItems = this._printItems.getValue();
-    const foundItem = tmpItems.find(item => item.id === idOfItemToRemove);
+    const foundItem = tmpItems.find((item) => item.id === idOfItemToRemove);
     return foundItem;
   }
-
 
   /**
    * Print a print Item
@@ -466,21 +415,52 @@ export class NgxPrinterService {
    * Print al list of print Items one after the other
    * @param printItemToPrint
    */
-  public printPrintItems(printItemsToPrint: PrintItem[], className?: string): void {
-    const newDiv = <HTMLDivElement>document.createElement('div');
+  public printPrintItems(
+    printItemsToPrint: PrintItem[],
+    className?: string
+  ): void {
+    const newDiv = <HTMLDivElement>document.createElement("div");
 
     if (className) {
       newDiv.classList.add(className);
     } else {
-      newDiv.style.display = 'flex';
-      newDiv.style.flexDirection = 'column';
+      newDiv.style.display = "flex";
+      newDiv.style.flexDirection = "column";
     }
 
-    printItemsToPrint.forEach(element => {
+    printItemsToPrint.forEach((element) => {
       newDiv.appendChild(element.nativeElement.cloneNode(true));
     });
 
-
     this.printHTMLElement(newDiv);
+  }
+
+  /**
+   * Create node or angular component and returns nodes array
+   * @param content
+   * @internal
+   */
+  private resolveNgContent<T>(content: Content<T>, context: any): any {
+    if (typeof content === "string") {
+      const element = document.createTextNode(content);
+      return [[element]];
+    }
+
+    if (content instanceof TemplateRef) {
+      const viewRef = content.createEmbeddedView(context);
+      viewRef.detectChanges();
+      return [viewRef.rootNodes];
+    }
+
+    if (content instanceof HTMLElement) {
+      return [[content]];
+    }
+
+    /** Otherwise it's a component */
+    const factory = this.resolver.resolveComponentFactory(content);
+
+    const componentRef = factory.create(this.injector);
+    componentRef.changeDetectorRef.detectChanges();
+    return [[componentRef.location.nativeElement]];
   }
 }

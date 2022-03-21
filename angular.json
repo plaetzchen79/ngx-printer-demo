@@ -96,6 +96,15 @@
               "src/assets"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -129,13 +138,13 @@
           "options": {
             "tsConfig": "projects/ngx-printer/tsconfig.lib.json",
             "project": "projects/ngx-printer/ng-package.json"
-          }
-        ,          "configurations": {
+          },
+          "configurations": {
             "production": {
               "tsConfig": "projects/ngx-printer/tsconfig.lib.prod.json"
             }
           }
-},
+        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -147,5 +156,8 @@
       }
     }
   },
-  "defaultProject": "ngx-printer-demo"
+  "defaultProject": "ngx-printer-demo",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
