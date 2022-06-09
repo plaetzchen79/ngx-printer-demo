@@ -1,3 +1,8 @@
+
+# 1.2.0
+- updated to Angular 14
+- security issues
+
 # 1.1.0
 - updated to Angular 13
 - security issues

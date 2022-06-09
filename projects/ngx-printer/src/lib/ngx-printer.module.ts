@@ -7,10 +7,9 @@ import { PrintItemMarkerDirective } from './print-item-marker.directive';
 import { NoPrintDirective } from './no-print.directive';
 
 @NgModule({
-  declarations: [NgxPrinterComponent, PrintItemDirective, PrintItemButtonDirective, PrintItemMarkerDirective, NoPrintDirective],
-  imports: [],
-  exports: [NgxPrinterComponent, PrintItemDirective, PrintItemButtonDirective, PrintItemMarkerDirective, NoPrintDirective],
-  entryComponents: [NgxPrinterComponent]
+    declarations: [NgxPrinterComponent, PrintItemDirective, PrintItemButtonDirective, PrintItemMarkerDirective, NoPrintDirective],
+    imports: [],
+    exports: [NgxPrinterComponent, PrintItemDirective, PrintItemButtonDirective, PrintItemMarkerDirective, NoPrintDirective]
 })
 export class NgxPrinterModule {
   static forRoot(config: PrintServiceConfig): ModuleWithProviders<NgxPrinterModule> {
