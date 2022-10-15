@@ -46,7 +46,7 @@ You can adjust the time using the property *timeToWaitRender* (also in forRoot).
 ### Default CSS-Class
 When printing to the current window the service creates an component with a
 css-class called 'default'.
-You can override this class name using the property *renderClass* (also in forRoot).
+You can override this class *name* using the property *renderClass* (also in forRoot).
 Make sure that the class is placed in your global styles (styles.css).
 
 ### Name of app-root
