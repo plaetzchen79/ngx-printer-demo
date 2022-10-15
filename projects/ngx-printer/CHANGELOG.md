@@ -1,3 +1,5 @@
+# 1.2.1
+- fixes #59
 
 # 1.2.0
 - updated to Angular 14

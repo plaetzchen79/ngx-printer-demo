@@ -296,9 +296,15 @@ export class NgxPrinterService {
     if (that.eventadded[printWindow.name]) {
       return;
     }
+
+    // hacky: see
+    // https://stackoverflow.com/questions/66110639/afterprint-event-not-firing-on-first-page-load-in-chrome
+    
+    printWindow.addEventListener('beforeprint', () => {});
+
     printWindow.addEventListener("afterprint", () => {
       this.eventadded[printWindow.name] = true;
-      // console.log('afterprint');
+      console.log('afterprint');
       if (printWithOpenInNewWindow) {
         that.eventadded[printWindow.name] = false;
       }
