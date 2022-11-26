@@ -1,3 +1,6 @@
+# 1.2.2
+- updated to Angular 15
+
 # 1.2.1
 - fixes #59
 
