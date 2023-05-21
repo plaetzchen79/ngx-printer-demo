@@ -1,8 +1,8 @@
 
-# 1.3.0
+# 1.4.0
 - updated to Angular 16
 
-# 1.2.2
+# 1.3.0
 - updated to Angular 15
 
 # 1.2.1
