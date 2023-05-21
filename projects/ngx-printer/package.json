@@ -1,9 +1,9 @@
 {
   "name": "ngx-printer",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "peerDependencies": {
-    "@angular/common": "^15.0.0",
-    "@angular/core": "^15.0.0"
+    "@angular/common": "^16.0.0",
+    "@angular/core": "^16.0.0"
   },
   "description": "An easy to use service to print a window or parts of a window (div).\r Printing of Angular Templates or Components is possible.",
   "main": "karma.conf.js",

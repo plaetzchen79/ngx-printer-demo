@@ -77,7 +77,7 @@ export class NgxPrinterService {
   }
 
   /**
-   * Set config from forRoot
+   * Set global config from forRoot
    * @param config
    */
   private setRootConfigOptions(config: PrintServiceConfig): void {
@@ -191,6 +191,7 @@ export class NgxPrinterService {
       componentRef = factory.create(this.injector);
     }
     componentRef.instance.renderClass = this.renderClass;
+
     if (imgSrc) {
       componentRef.instance.imgSrc = imgSrc;
       return componentRef;
@@ -305,6 +306,7 @@ export class NgxPrinterService {
     printWindow.addEventListener("afterprint", () => {
       this.eventadded[printWindow.name] = true;
       console.log('afterprint');
+      
       if (printWithOpenInNewWindow) {
         that.eventadded[printWindow.name] = false;
       }
@@ -442,7 +444,7 @@ export class NgxPrinterService {
   }
 
   /**
-   * Create node or angular component and returns nodes array
+   * Create node or angular component and returns an array of nodes
    * @param content
    * @internal
    */

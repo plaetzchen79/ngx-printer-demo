@@ -1,7 +1,7 @@
 
 export class Helpers {
 
-    /**
+  /**
    * Copy Css links to new page
    * @param printWindow
    */
