@@ -3,11 +3,13 @@ import { ngxPrintMarkerPosition } from "./ngx-print-marker-position.enum";
 import { PrintItem } from "./print-item";
 import {
   ComponentFactoryResolver,
+  EnvironmentInjector,
   Injectable,
   Injector,
   Optional,
   TemplateRef,
   Type,
+  createComponent,
 } from "@angular/core";
 import { NgxPrinterComponent } from "./ngx-printer.component";
 import { BehaviorSubject } from "rxjs";
@@ -70,8 +72,7 @@ export class NgxPrinterService {
 
   constructor(
     @Optional() config: PrintServiceConfig,
-    private resolver: ComponentFactoryResolver,
-    private injector: Injector
+    private envInjector: EnvironmentInjector,
   ) {
     this.setRootConfigOptions(config);
   }
@@ -177,8 +178,7 @@ export class NgxPrinterService {
     imgSrc?: string,
     context?: any
   ): any {
-    // this.viewContainerRef.clear();
-    const factory = this.resolver.resolveComponentFactory(NgxPrinterComponent);
+ 
     let componentRef: any;
 
     if (contentToRender) {
@@ -186,10 +186,18 @@ export class NgxPrinterService {
         context = null;
       }
       const ngContent = this.resolveNgContent(contentToRender, context);
-      componentRef = factory.create(this.injector, ngContent); // this.viewContainerRef.createComponent(factory);
+
+      componentRef = createComponent(NgxPrinterComponent, {
+        environmentInjector: this.envInjector,
+        projectableNodes: ngContent
+      });
+
     } else {
-      componentRef = factory.create(this.injector);
+      componentRef = createComponent(NgxPrinterComponent, {
+        environmentInjector: this.envInjector,
+      });
     }
+
     componentRef.instance.renderClass = this.renderClass;
 
     if (imgSrc) {
@@ -208,6 +216,7 @@ export class NgxPrinterService {
   private print(printContent: any, printOpenWindow: boolean): void {
     if (printOpenWindow === true) {
       const printContentClone = document.importNode(printContent, true); // printContent.cloneNode(true);
+      
       this.hideBeforePrint(printContentClone);
       this.printInNewWindow(printContentClone);
     }
@@ -303,7 +312,7 @@ export class NgxPrinterService {
     
     printWindow.addEventListener('beforeprint', () => {});
 
-    printWindow.addEventListener("afterprint", () => {
+    printWindow.addEventListener('afterprint', () => {
       this.eventadded[printWindow.name] = true;
       console.log('afterprint');
       
@@ -383,6 +392,7 @@ export class NgxPrinterService {
    */
   public addPrintItem(newPrintItem: PrintItem): void {
     const tmpItems = this._printItems.getValue();
+
     tmpItems.push(newPrintItem);
     this._printItems.next(tmpItems);
   }
@@ -396,6 +406,7 @@ export class NgxPrinterService {
   public removePrintItem(idOfItemToRemove: string): void {
     const tmpItems = this._printItems.getValue();
     const newIitems = tmpItems.filter((item) => item.id !== idOfItemToRemove);
+
     this._printItems.next(newIitems);
   }
 
@@ -408,6 +419,7 @@ export class NgxPrinterService {
   public getPrintItem(idOfItemToRemove: string): PrintItem {
     const tmpItems = this._printItems.getValue();
     const foundItem = tmpItems.find((item) => item.id === idOfItemToRemove);
+
     return foundItem;
   }
 
@@ -451,12 +463,15 @@ export class NgxPrinterService {
   private resolveNgContent<T>(content: Content<T>, context: any): any {
     if (typeof content === "string") {
       const element = document.createTextNode(content);
+
       return [[element]];
     }
 
     if (content instanceof TemplateRef) {
       const viewRef = content.createEmbeddedView(context);
+
       viewRef.detectChanges();
+
       return [viewRef.rootNodes];
     }
 
@@ -465,10 +480,14 @@ export class NgxPrinterService {
     }
 
     /** Otherwise it's a component */
-    const factory = this.resolver.resolveComponentFactory(content);
 
-    const componentRef = factory.create(this.injector);
+    let componentRef =  createComponent(content, {
+      environmentInjector: this.envInjector,
+    });
+
+
     componentRef.changeDetectorRef.detectChanges();
+    
     return [[componentRef.location.nativeElement]];
   }
 }
