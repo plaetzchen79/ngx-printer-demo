@@ -1,3 +1,6 @@
+# 1.5.0
+- updated to Angular 17
+- removed deprecated component factory resolver
 
 # 1.4.0
 - updated to Angular 16
@@ -22,6 +25,7 @@
 # 0.9.2
 - fixes #25
 - security issues
+
 # 0.9.1
 - fixes #21, #22
 

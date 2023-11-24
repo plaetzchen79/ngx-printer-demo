@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-printer-demo:build"
+            "buildTarget": "ngx-printer-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-printer-demo:build:production"
+              "buildTarget": "ngx-printer-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-printer-demo:build"
+            "buildTarget": "ngx-printer-demo:build"
           }
         },
         "test": {
