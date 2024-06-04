@@ -21,6 +21,7 @@
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
+    "compilationMode": "partial",
     "enableResourceInlining": true
   },
   "exclude": [
