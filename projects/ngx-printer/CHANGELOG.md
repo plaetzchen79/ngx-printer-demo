@@ -1,3 +1,6 @@
+# 1.6.0
+- updated to Angular 18
+
 # 1.5.0
 - updated to Angular 17
 - removed deprecated component factory resolver
