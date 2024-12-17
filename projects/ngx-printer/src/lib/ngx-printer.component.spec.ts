@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {  ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NgxPrinterComponent } from './ngx-printer.component';
 
@@ -6,7 +6,7 @@ describe('NgxPrinterComponent', () => {
   let component: NgxPrinterComponent;
   let fixture: ComponentFixture<NgxPrinterComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NgxPrinterComponent ]
     })

@@ -15,7 +15,8 @@ import { ngxPrintMarkerPosition } from './ngx-print-marker-position.enum';
  * Mark an div as printable and provide direct print function
  */
 @Directive({
-  selector: '[ngxPrintItemMarker]',
+    selector: '[ngxPrintItemMarker]',
+    standalone: false
 })
 export class PrintItemMarkerDirective implements OnInit {
   @Input()

@@ -6,9 +6,10 @@ import { PrintItem } from 'projects/ngx-printer/src/lib/print-item';
 import { ngxPrintMarkerPosition } from 'projects/ngx-printer/src/public_api';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
   @ViewChild('PrintTemplate')

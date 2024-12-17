@@ -8,7 +8,8 @@ import { PrintItem } from './print-item';
  * An id has to be set
  */
 @Directive({
-  selector: '[ngxPrintItem]'
+    selector: '[ngxPrintItem]',
+    standalone: false
 })
 export class PrintItemDirective implements OnInit, OnDestroy {
 

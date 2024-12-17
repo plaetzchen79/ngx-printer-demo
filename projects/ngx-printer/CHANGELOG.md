@@ -1,3 +1,6 @@
+# 1.7.0
+- updated to Angular 19
+
 # 1.6.0
 - updated to Angular 18
 

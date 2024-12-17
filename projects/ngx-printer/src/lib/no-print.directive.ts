@@ -4,7 +4,8 @@ import { Directive, ElementRef, Renderer2 } from '@angular/core';
  * Directive to mark an element so that it should NOT be printed
  */
 @Directive({
-  selector: '[ngxNoPrint]'
+    selector: '[ngxNoPrint]',
+    standalone: false
 })
 export class NoPrintDirective {
 

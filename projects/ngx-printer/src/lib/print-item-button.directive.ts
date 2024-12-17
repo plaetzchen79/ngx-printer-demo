@@ -6,7 +6,8 @@ import { PrintItem } from './print-item';
  * Directly add function to a button to print an item
  */
 @Directive({
-  selector: '[ngxPrintItemButton]'
+    selector: '[ngxPrintItemButton]',
+    standalone: false
 })
 export class PrintItemButtonDirective implements OnInit {
 

@@ -11,11 +11,12 @@ import {
  * Component used to render content when printed to current window
  */
 @Component({
-  selector: 'ngx-printer',
-  template: `
+    selector: 'ngx-printer',
+    template: `
     <ng-content></ng-content>
   `,
-  styleUrls: ['./ngx-printer.component.css']
+    styleUrls: ['./ngx-printer.component.css'],
+    standalone: false
 })
 export class NgxPrinterComponent implements OnInit {
 
