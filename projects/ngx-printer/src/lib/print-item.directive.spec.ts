@@ -6,7 +6,7 @@ describe('PrintItemDirective', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should create an instance PrintItemDirective', () => {
-    const service = TestBed.get(NgxPrinterService);
+    const service = TestBed.inject(NgxPrinterService);
     const directive = new PrintItemDirective(null, service);
     expect(directive).toBeTruthy();
   });

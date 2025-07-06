@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { NgxPrinterService } from './ngx-printer.service';
 import { PrintServiceConfig, PrintItem } from '../public_api';
-import { doesNotThrow } from 'assert';
 
 describe('NgxPrinterService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

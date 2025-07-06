@@ -4,7 +4,7 @@ import { NgxPrinterService } from './ngx-printer.service';
 
 describe('PrintItemButtonDirective', () => {
   it('should create an instance', () => {
-    const service = TestBed.get(NgxPrinterService);
+    const service = TestBed.inject(NgxPrinterService);
     const directive = new PrintItemButtonDirective(null, service);
     expect(directive).toBeTruthy();
   });
