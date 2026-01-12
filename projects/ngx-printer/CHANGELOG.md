@@ -1,3 +1,6 @@
+# 1.9.0
+- updated to Angular 21
+
 # 1.8.0
 - updated to Angular 20
 
